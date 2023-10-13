@@ -38,7 +38,7 @@ class AutenticacionService {
         this.router = router;
         this.jwtHelper = new _auth0_angular_jwt__WEBPACK_IMPORTED_MODULE_3__.JwtHelperService();
         this.url = `${src_environments_environment__WEBPACK_IMPORTED_MODULE_2__.environment.urlG}/auth`;
-        this.encryptionKey = 'proyectoserviciosocialksamdlmadmladjljejjaljadladadajdlkajdlajdladakdljasdljadjdalsdasjdaljdalkjdaldadja';
+        this.encryptionKey = 'proyectoserviciosocial';
         this.jwtHelper = new _auth0_angular_jwt__WEBPACK_IMPORTED_MODULE_3__.JwtHelperService();
     }
     login(cred) {
@@ -3244,7 +3244,7 @@ __webpack_require__.r(__webpack_exports__);
 // The list of file replacements can be found in `angular.json`.
 const environment = {
     production: false,
-    urlG: 'http://3.139.84.14:8083'
+    urlG: 'http://3.133.95.217:8083'
 };
 
 
