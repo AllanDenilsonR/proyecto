@@ -334,9 +334,9 @@ class ListadetalleComponent {
             this.estadoActividad = new _models_estudiante__WEBPACK_IMPORTED_MODULE_2__.ActividadEstadoModi(estadoActividad);
             this.actiEstadoService.editarEstadoAct(idActividad, this.estadoActividad).subscribe((r) => {
                 console.log("entro a estadoActividad");
+                this.reload();
             });
         });
-        this.reload();
     }
     ngOnDestroy() {
         this.dtTrigger.unsubscribe();
