@@ -273,7 +273,7 @@ class ListadetalleComponent {
                 if (result.isConfirmed) {
                     this.cambiarEstadosActividades(this.idActividadParam, 'Inactivo', this.id, 'Finalizado');
                     sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire('Modificado', 'El estado ha sido modificado', 'success');
-                    this.reload();
+                    // this.reload();
                     console.log("entro a cargar detalles, cuando el estado es pendiente");
                 }
                 else if (result.isDenied) {
@@ -293,7 +293,7 @@ class ListadetalleComponent {
                 if (result.isConfirmed) {
                     this.cambiarEstadosActividades(this.idActividadParam, 'Inactivo', this.id, 'Finalizado');
                     sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire('Modificado', 'El estado ha sido modificado', 'success');
-                    this.reload();
+                    // this.reload();
                     console.log("entro a cargar detalles, cuando el estado es ejecucion");
                 }
                 else if (result.isDenied) {
@@ -313,7 +313,7 @@ class ListadetalleComponent {
                 if (result.isConfirmed) {
                     this.cambiarEstadosActividades(this.idActividadParam, 'Activo', this.id, 'Pendiente');
                     sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire('Modificado', 'El estado ha sido modificado', 'success');
-                    this.reload();
+                    // this.reload();
                     console.log("entro a cargar detalles, cuando el estado es finalizado");
                 }
                 else if (result.isDenied) {
@@ -336,6 +336,7 @@ class ListadetalleComponent {
                 console.log("entro a estadoActividad");
             });
         });
+        this.reload();
     }
     ngOnDestroy() {
         this.dtTrigger.unsubscribe();
