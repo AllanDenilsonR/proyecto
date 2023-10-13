@@ -255,6 +255,7 @@ class ListadetalleComponent {
         this.idActividadParam = idactividad; //obteniendo el id de la actividad para usarlo en el cambio d estado
         this.estudianteServicio.mostrarActividadesDetalleList(id, idactividad).subscribe(resp => {
             this.detalles = resp;
+            console.log("entro a cargar detalles");
             this.dtTrigger.next(null);
         });
     }
@@ -273,6 +274,7 @@ class ListadetalleComponent {
                     this.cambiarEstadosActividades(this.idActividadParam, 'Inactivo', this.id, 'Finalizado');
                     sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire('Modificado', 'El estado ha sido modificado', 'success');
                     this.reload();
+                    console.log("entro a cargar detalles, cuando el estado es pendiente");
                 }
                 else if (result.isDenied) {
                     sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire('Cambios no aplicados', '', 'info');
@@ -292,6 +294,7 @@ class ListadetalleComponent {
                     this.cambiarEstadosActividades(this.idActividadParam, 'Inactivo', this.id, 'Finalizado');
                     sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire('Modificado', 'El estado ha sido modificado', 'success');
                     this.reload();
+                    console.log("entro a cargar detalles, cuando el estado es ejecucion");
                 }
                 else if (result.isDenied) {
                     sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire('Cambios no aplicados', '', 'info');
@@ -311,21 +314,26 @@ class ListadetalleComponent {
                     this.cambiarEstadosActividades(this.idActividadParam, 'Activo', this.id, 'Pendiente');
                     sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire('Modificado', 'El estado ha sido modificado', 'success');
                     this.reload();
+                    console.log("entro a cargar detalles, cuando el estado es finalizado");
                 }
                 else if (result.isDenied) {
                     sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire('Cambios no aplicados', '', 'info');
                 }
             });
         }
-        else { }
+        else {
+            console.log("entro a no hacer nada");
+        }
     }
     cambiarEstadosActividades(idActividad, estadoActividad, idDetalle, estadoDetalle) {
         //cambiando el estado detalle
         this.estadoDetalle = new _actividad_models_detalleactividad__WEBPACK_IMPORTED_MODULE_0__.DetalleActividadEstado(estadoDetalle);
         this.cambioEstadoDtServicio.editarEstadoDt(idDetalle, this.estadoDetalle).subscribe((resp) => {
             //cambiando el estado de la actividad
+            console.log("entro a estadoDetalle");
             this.estadoActividad = new _models_estudiante__WEBPACK_IMPORTED_MODULE_2__.ActividadEstadoModi(estadoActividad);
             this.actiEstadoService.editarEstadoAct(idActividad, this.estadoActividad).subscribe((r) => {
+                console.log("entro a estadoActividad");
             });
         });
     }
@@ -335,7 +343,7 @@ class ListadetalleComponent {
     reload() {
         if (this.dtElement.dtInstance) {
             this.dtElement.dtInstance.then((dtInstance) => {
-                // this.detalles=[];
+                //  this.detalles=[];
                 dtInstance.destroy();
                 this.cargarDetalles(this.estudianteId, this.idActividad);
             });
