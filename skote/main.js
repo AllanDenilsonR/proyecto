@@ -3244,7 +3244,7 @@ __webpack_require__.r(__webpack_exports__);
 // The list of file replacements can be found in `angular.json`.
 const environment = {
     production: false,
-    urlG: 'https://3.143.169.145:8083'
+    urlG: 'https://desplieugueallan2023.me'
 };
 
 
