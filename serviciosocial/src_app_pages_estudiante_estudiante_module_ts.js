@@ -268,16 +268,28 @@ class ListadetalleComponent {
                 text: `Esto se puede revertir`,
                 icon: 'question',
                 showCancelButton: true,
+                confirmButtonColor: "#a90000",
+                cancelButtonColor: '#343a40',
                 confirmButtonText: 'Sí, cambiar',
                 cancelButtonText: 'Cancelar'
             }).then((result) => {
                 if (result.isConfirmed) {
                     this.cambiarEstadosActividades(this.idActividadParam, 'Inactivo', this.id, 'Finalizado');
-                    sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire('Modificado', 'El estado ha sido modificado', 'success');
+                    sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire({
+                        confirmButtonColor: "#a90000",
+                        title: 'Éxito',
+                        text: 'El estado ha sido modificado',
+                        icon: 'success',
+                    });
                     //this.reload();
                 }
                 else if (result.isDenied) {
-                    sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire('Cambios no aplicados', '', 'info');
+                    sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire({
+                        confirmButtonColor: "#a90000",
+                        title: "Información",
+                        text: `Cambios no aplicados`,
+                        icon: "info",
+                    });
                 }
             });
         }
@@ -287,16 +299,28 @@ class ListadetalleComponent {
                 text: `Esto se puede revertir`,
                 icon: 'question',
                 showCancelButton: true,
+                confirmButtonColor: "#a90000",
+                cancelButtonColor: '#343a40',
                 confirmButtonText: 'Sí, cambiar',
                 cancelButtonText: 'Cancelar'
             }).then((result) => {
                 if (result.isConfirmed) {
                     this.cambiarEstadosActividades(this.idActividadParam, 'Inactivo', this.id, 'Finalizado');
-                    sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire('Modificado', 'El estado ha sido modificado', 'success');
+                    sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire({
+                        confirmButtonColor: "#a90000",
+                        title: 'Éxito',
+                        text: 'El estado ha sido modificado',
+                        icon: 'success',
+                    });
                     //this.reload();
                 }
                 else if (result.isDenied) {
-                    sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire('Cambios no aplicados', '', 'info');
+                    sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire({
+                        confirmButtonColor: "#a90000",
+                        title: "Información",
+                        text: `Cambios no aplicados`,
+                        icon: "info",
+                    });
                 }
             });
         }
@@ -306,20 +330,31 @@ class ListadetalleComponent {
                 text: `Esto se puede revertir`,
                 icon: 'question',
                 showCancelButton: true,
+                confirmButtonColor: "#a90000",
+                cancelButtonColor: '#343a40',
                 confirmButtonText: 'Sí, cambiar',
                 cancelButtonText: 'Cancelar'
             }).then((result) => {
                 if (result.isConfirmed) {
                     this.cambiarEstadosActividades(this.idActividadParam, 'Activo', this.id, 'Pendiente');
-                    sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire('Modificado', 'El estado ha sido modificado', 'success');
+                    sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire({
+                        confirmButtonColor: "#a90000",
+                        title: 'Éxito',
+                        text: 'El estado ha sido modificado',
+                        icon: 'success',
+                    });
                     // this.reload();
                 }
                 else if (result.isDenied) {
-                    sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire('Cambios no aplicados', '', 'info');
+                    sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire({
+                        confirmButtonColor: "#a90000",
+                        title: "Información",
+                        text: `Cambios no aplicados`,
+                        icon: "info",
+                    });
                 }
             });
         }
-        else { }
     }
     cambiarEstadosActividades(idActividad, estadoActividad, idDetalle, estadoDetalle) {
         //cambiando el estado detalle
@@ -482,15 +517,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "ActividadesComponent": () => (/* binding */ ActividadesComponent)
 /* harmony export */ });
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs */ 64008);
-/* harmony import */ var _listadetalle_listadetalle_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../listadetalle/listadetalle.component */ 83239);
-/* harmony import */ var angular_datatables__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! angular-datatables */ 12051);
+/* harmony import */ var angular_datatables__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! angular-datatables */ 12051);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ 14001);
-/* harmony import */ var _service_estudiante_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../service/estudiante.service */ 93557);
+/* harmony import */ var _service_estudiante_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../service/estudiante.service */ 93557);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/router */ 13252);
 /* harmony import */ var _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ 44070);
-/* harmony import */ var _shared_ui_loader_loader_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../shared/ui/loader/loader.component */ 33005);
+/* harmony import */ var _shared_ui_loader_loader_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../shared/ui/loader/loader.component */ 33005);
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/common */ 28267);
-
+/* harmony import */ var _listadetalle_listadetalle_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../listadetalle/listadetalle.component */ 83239);
 
 
 
@@ -699,7 +733,6 @@ class ActividadesComponent {
     OpenDetalle(content, estudiante) {
         this.estudent = estudiante;
         this.modalService.open(content, { size: 'lg', backdrop: 'static', keyboard: false });
-        //this.childComponent.cargarDetalles(this.id, this.estudent.idactividad);
     }
     openModal(content) {
         this.modalService.open(content, {
@@ -727,14 +760,12 @@ class ActividadesComponent {
         this.ro.navigate([currentUrl]);
     }
 }
-ActividadesComponent.ɵfac = function ActividadesComponent_Factory(t) { return new (t || ActividadesComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdirectiveInject"](_service_estudiante_service__WEBPACK_IMPORTED_MODULE_2__.EstudianteService), _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_6__.ActivatedRoute), _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdirectiveInject"](_ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_7__.NgbModal), _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_6__.Router)); };
+ActividadesComponent.ɵfac = function ActividadesComponent_Factory(t) { return new (t || ActividadesComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdirectiveInject"](_service_estudiante_service__WEBPACK_IMPORTED_MODULE_1__.EstudianteService), _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_6__.ActivatedRoute), _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdirectiveInject"](_ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_7__.NgbModal), _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_6__.Router)); };
 ActividadesComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdefineComponent"]({ type: ActividadesComponent, selectors: [["app-actividades"]], viewQuery: function ActividadesComponent_Query(rf, ctx) { if (rf & 1) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵviewQuery"](angular_datatables__WEBPACK_IMPORTED_MODULE_1__.DataTableDirective, 5);
-        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵviewQuery"](_listadetalle_listadetalle_component__WEBPACK_IMPORTED_MODULE_0__.ListadetalleComponent, 5);
+        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵviewQuery"](angular_datatables__WEBPACK_IMPORTED_MODULE_0__.DataTableDirective, 5);
     } if (rf & 2) {
         let _t;
         _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵqueryRefresh"](_t = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵloadQuery"]()) && (ctx.dtElement = _t.first);
-        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵqueryRefresh"](_t = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵloadQuery"]()) && (ctx.childComponent = _t.first);
     } }, decls: 26, vars: 3, consts: [[1, "container-fluid"], [1, "row"], [1, "card"], [1, "card-body"], [1, "col-sm-12", "text-end"], [1, "text-sm-end", "mb-3"], ["type", "button", "data-toggle", "tooltip", "ngbTooltip", "Ayuda", "data-placement", "end", 1, "btn", "btn-info", "btn-icon", "rounded-circle", "btn-transparent", 2, "margin-right", "+35px", 3, "click"], [1, "fa", "fa-question-circle", "fa-lg"], ["datatable", "", "width", "100%", 1, "row-border", "hover", 3, "dtOptions", "dtTrigger"], [1, "table", "bg-light", "bg-gradient"], [1, ""], [1, "text-center"], [4, "ngFor", "ngForOf"], ["role", "document"], ["contentEditarEstado", ""], ["ayuda", ""], ["width", "10%", 1, "text-center"], [1, "p-1", "rounded", "text-white", "text-center", 3, "ngClass"], ["ngbTooltip", "Ver Detalle", 1, "btn", "btn-outline-primary", "btn-sm", "dripicons-preview", 3, "click"], ["id", "modalDetallesEstu", "tabindex", "-1", "aria-labelledby", "exampleModalLabel", "aria-hidden", "true"], [1, "modal-header"], ["id", "exampleModalLabel", 1, "modal-title"], ["type", "button", "aria-hidden", "true", 1, "btn-close", 3, "click"], [1, "modal-body"], [3, "idActividad", "estudianteId"], [1, "modal-header", "bg"], [1, "modal-title", "text-white"], ["type", "button", "aria-label", "Close", 1, "close", 3, "click"], [1, "modal-body", "text-justify"], [2, "margin-bottom", "15px"], [1, "fs-5"], [2, "font-size", "15px"], [1, "text-danger"], [1, "modal-footer"], ["type", "button", 1, "btn", "btn-dark", 3, "click"]], template: function ActividadesComponent_Template(rf, ctx) { if (rf & 1) {
         const _r16 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵgetCurrentView"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelement"](0, "app-loader");
@@ -782,7 +813,7 @@ ActividadesComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODUL
         _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵproperty"]("dtOptions", ctx.dtOptions)("dtTrigger", ctx.dtTriggerr);
         _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](12);
         _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵproperty"]("ngForOf", ctx.listaActividades);
-    } }, directives: [_shared_ui_loader_loader_component__WEBPACK_IMPORTED_MODULE_3__.LoaderComponent, _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_7__.NgbTooltip, angular_datatables__WEBPACK_IMPORTED_MODULE_1__.DataTableDirective, _angular_common__WEBPACK_IMPORTED_MODULE_8__.NgForOf, _angular_common__WEBPACK_IMPORTED_MODULE_8__.NgClass, _listadetalle_listadetalle_component__WEBPACK_IMPORTED_MODULE_0__.ListadetalleComponent], styles: ["@charset \"UTF-8\";\n.btn-icon.rounded-circle[_ngcontent-%COMP%] {\n  width: 20px;\n  \n  height: 20px;\n  padding: 0;\n  \n  line-height: 25px;\n  \n  font-size: 20px;\n  \n}\n.btn-transparent[_ngcontent-%COMP%] {\n  background-color: transparent;\n  \n  border: none;\n  \n  color: #007bff;\n  \n}\n\n.btn-transparent[_ngcontent-%COMP%]:hover {\n  color: #0056b3;\n  \n}\n.closeA[_ngcontent-%COMP%] {\n  position: absolute;\n  \n  top: 25px;\n  \n  left: 750px;\n  \n}\n.modal-headerA[_ngcontent-%COMP%] {\n  background-color: #6e0000;\n  height: 80px;\n}\n.modal-titleA[_ngcontent-%COMP%] {\n  color: #fff;\n  \n  position: absolute;\n  \n  top: 20px;\n  \n  left: 12px;\n}\n.bg[_ngcontent-%COMP%] {\n  background-color: #6e0000;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFjdGl2aWRhZGVzLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGdCQUFnQjtBQUNoQjtFQUNFLFdBQUE7RUFDQSw0Q0FBQTtFQUNBLFlBQUE7RUFDQSxVQUFBO0VBQ0EsMERBQUE7RUFDQSxpQkFBQTtFQUNBLHNDQUFBO0VBQ0EsZUFBQTtFQUNBLCtDQUFBO0FBQ0Y7QUFFQTtFQUNFLDZCQUFBO0VBQ0EseUNBQUE7RUFDQSxZQUFBO0VBQ0EscUNBQUE7RUFDQSxjQUFBO0VBQ0EscURBQUE7QUFDRjtBQUVBLGdGQUFBO0FBQ0E7RUFDRSxjQUFBO0VBQ0EsNERBQUE7QUFDRjtBQUVBO0VBQ0Usa0JBQUE7RUFDSSwwREFBQTtFQUNBLFNBQUE7RUFDQSxzQ0FBQTtFQUNBLFdBQUE7RUFDQSxpQ0FBQTtBQUNOO0FBR0E7RUFDQyx5QkFBQTtFQUNDLFlBQUE7QUFBRjtBQUlBO0VBQ0UsV0FBQTtFQUNBLHFDQUFBO0VBQ0Esa0JBQUE7RUFDSSwwREFBQTtFQUNBLFNBQUE7RUFDQSxzQ0FBQTtFQUNJLFVBQUE7QUFEVjtBQUlBO0VBQ0UseUJBQUE7QUFERiIsImZpbGUiOiJhY3RpdmlkYWRlcy5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIkBjaGFyc2V0IFwiVVRGLThcIjtcbi5idG4taWNvbi5yb3VuZGVkLWNpcmNsZSB7XG4gIHdpZHRoOiAyMHB4O1xuICAvKiBDYW1iaWEgZWwgdGFtYcOxbyBzZWfDum4gdHVzIHByZWZlcmVuY2lhcyAqL1xuICBoZWlnaHQ6IDIwcHg7XG4gIHBhZGRpbmc6IDA7XG4gIC8qIEVsaW1pbmEgZWwgcmVsbGVubyBwYXJhIHF1ZSBzZWEgY29tcGxldGFtZW50ZSByZWRvbmRvICovXG4gIGxpbmUtaGVpZ2h0OiAyNXB4O1xuICAvKiBBbGluZWEgZWwgY29udGVuaWRvIHZlcnRpY2FsbWVudGUgKi9cbiAgZm9udC1zaXplOiAyMHB4O1xuICAvKiBBanVzdGEgZWwgdGFtYcOxbyBkZWwgaWNvbm8gc2kgZXMgbmVjZXNhcmlvICovXG59XG5cbi5idG4tdHJhbnNwYXJlbnQge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiB0cmFuc3BhcmVudDtcbiAgLyogRXN0YWJsZWNlIGVsIGZvbmRvIGNvbW8gdHJhbnNwYXJlbnRlICovXG4gIGJvcmRlcjogbm9uZTtcbiAgLyogRWxpbWluYSBlbCBib3JkZSBzaSBlcyBuZWNlc2FyaW8gKi9cbiAgY29sb3I6ICMwMDdiZmY7XG4gIC8qIENhbWJpYSBlbCBjb2xvciBkZWwgdGV4dG8gc2Vnw7puIHR1cyBwcmVmZXJlbmNpYXMgKi9cbn1cblxuLyogUGVyc29uYWxpemEgZWwgY29sb3IgZGUgdGV4dG8gY3VhbmRvIHNlIHBhc2EgZWwgY3Vyc29yIHBvciBlbmNpbWEgZGVsIGJvdMOzbiAqL1xuLmJ0bi10cmFuc3BhcmVudDpob3ZlciB7XG4gIGNvbG9yOiAjMDA1NmIzO1xuICAvKiBDYW1iaWEgZWwgY29sb3IgZGVsIHRleHRvIGFsIHBhc2FyIGVsIGN1cnNvciBwb3IgZW5jaW1hICovXG59XG5cbi5jbG9zZUEge1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIC8qIEVzdGFibGVjZXIgcG9zaWNpw7NuIGFic29sdXRhIHBhcmEgcG9zaWNpb25hciBlbCBib3TDs24gKi9cbiAgdG9wOiAyNXB4O1xuICAvKiBEaXN0YW5jaWEgZGVzZGUgbGEgcGFydGUgc3VwZXJpb3IgKi9cbiAgbGVmdDogNzUwcHg7XG4gIC8qIERpc3RhbmNpYSBkZXNkZSBsYSBpenF1aWVyZGEgKi9cbn1cblxuLm1vZGFsLWhlYWRlckEge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjNmUwMDAwO1xuICBoZWlnaHQ6IDgwcHg7XG59XG5cbi5tb2RhbC10aXRsZUEge1xuICBjb2xvcjogI2ZmZjtcbiAgLyogQ29sb3IgZGVsIHRleHRvIGVuIGVsIGVuY2FiZXphZG8gKi9cbiAgcG9zaXRpb246IGFic29sdXRlO1xuICAvKiBFc3RhYmxlY2VyIHBvc2ljacOzbiBhYnNvbHV0YSBwYXJhIHBvc2ljaW9uYXIgZWwgYm90w7NuICovXG4gIHRvcDogMjBweDtcbiAgLyogRGlzdGFuY2lhIGRlc2RlIGxhIHBhcnRlIHN1cGVyaW9yICovXG4gIGxlZnQ6IDEycHg7XG59XG5cbi5iZyB7XG4gIGJhY2tncm91bmQtY29sb3I6ICM2ZTAwMDA7XG59Il19 */"] });
+    } }, directives: [_shared_ui_loader_loader_component__WEBPACK_IMPORTED_MODULE_2__.LoaderComponent, _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_7__.NgbTooltip, angular_datatables__WEBPACK_IMPORTED_MODULE_0__.DataTableDirective, _angular_common__WEBPACK_IMPORTED_MODULE_8__.NgForOf, _angular_common__WEBPACK_IMPORTED_MODULE_8__.NgClass, _listadetalle_listadetalle_component__WEBPACK_IMPORTED_MODULE_3__.ListadetalleComponent], styles: ["@charset \"UTF-8\";\n.btn-icon.rounded-circle[_ngcontent-%COMP%] {\n  width: 20px;\n  \n  height: 20px;\n  padding: 0;\n  \n  line-height: 25px;\n  \n  font-size: 20px;\n  \n}\n.btn-transparent[_ngcontent-%COMP%] {\n  background-color: transparent;\n  \n  border: none;\n  \n  color: #007bff;\n  \n}\n\n.btn-transparent[_ngcontent-%COMP%]:hover {\n  color: #0056b3;\n  \n}\n.closeA[_ngcontent-%COMP%] {\n  position: absolute;\n  \n  top: 25px;\n  \n  left: 750px;\n  \n}\n.modal-headerA[_ngcontent-%COMP%] {\n  background-color: #6e0000;\n  height: 80px;\n}\n.modal-titleA[_ngcontent-%COMP%] {\n  color: #fff;\n  \n  position: absolute;\n  \n  top: 20px;\n  \n  left: 12px;\n}\n.bg[_ngcontent-%COMP%] {\n  background-color: #6e0000;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFjdGl2aWRhZGVzLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGdCQUFnQjtBQUNoQjtFQUNFLFdBQUE7RUFDQSw0Q0FBQTtFQUNBLFlBQUE7RUFDQSxVQUFBO0VBQ0EsMERBQUE7RUFDQSxpQkFBQTtFQUNBLHNDQUFBO0VBQ0EsZUFBQTtFQUNBLCtDQUFBO0FBQ0Y7QUFFQTtFQUNFLDZCQUFBO0VBQ0EseUNBQUE7RUFDQSxZQUFBO0VBQ0EscUNBQUE7RUFDQSxjQUFBO0VBQ0EscURBQUE7QUFDRjtBQUVBLGdGQUFBO0FBQ0E7RUFDRSxjQUFBO0VBQ0EsNERBQUE7QUFDRjtBQUVBO0VBQ0Usa0JBQUE7RUFDSSwwREFBQTtFQUNBLFNBQUE7RUFDQSxzQ0FBQTtFQUNBLFdBQUE7RUFDQSxpQ0FBQTtBQUNOO0FBR0E7RUFDQyx5QkFBQTtFQUNDLFlBQUE7QUFBRjtBQUlBO0VBQ0UsV0FBQTtFQUNBLHFDQUFBO0VBQ0Esa0JBQUE7RUFDSSwwREFBQTtFQUNBLFNBQUE7RUFDQSxzQ0FBQTtFQUNJLFVBQUE7QUFEVjtBQUlBO0VBQ0UseUJBQUE7QUFERiIsImZpbGUiOiJhY3RpdmlkYWRlcy5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIkBjaGFyc2V0IFwiVVRGLThcIjtcbi5idG4taWNvbi5yb3VuZGVkLWNpcmNsZSB7XG4gIHdpZHRoOiAyMHB4O1xuICAvKiBDYW1iaWEgZWwgdGFtYcOxbyBzZWfDum4gdHVzIHByZWZlcmVuY2lhcyAqL1xuICBoZWlnaHQ6IDIwcHg7XG4gIHBhZGRpbmc6IDA7XG4gIC8qIEVsaW1pbmEgZWwgcmVsbGVubyBwYXJhIHF1ZSBzZWEgY29tcGxldGFtZW50ZSByZWRvbmRvICovXG4gIGxpbmUtaGVpZ2h0OiAyNXB4O1xuICAvKiBBbGluZWEgZWwgY29udGVuaWRvIHZlcnRpY2FsbWVudGUgKi9cbiAgZm9udC1zaXplOiAyMHB4O1xuICAvKiBBanVzdGEgZWwgdGFtYcOxbyBkZWwgaWNvbm8gc2kgZXMgbmVjZXNhcmlvICovXG59XG5cbi5idG4tdHJhbnNwYXJlbnQge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiB0cmFuc3BhcmVudDtcbiAgLyogRXN0YWJsZWNlIGVsIGZvbmRvIGNvbW8gdHJhbnNwYXJlbnRlICovXG4gIGJvcmRlcjogbm9uZTtcbiAgLyogRWxpbWluYSBlbCBib3JkZSBzaSBlcyBuZWNlc2FyaW8gKi9cbiAgY29sb3I6ICMwMDdiZmY7XG4gIC8qIENhbWJpYSBlbCBjb2xvciBkZWwgdGV4dG8gc2Vnw7puIHR1cyBwcmVmZXJlbmNpYXMgKi9cbn1cblxuLyogUGVyc29uYWxpemEgZWwgY29sb3IgZGUgdGV4dG8gY3VhbmRvIHNlIHBhc2EgZWwgY3Vyc29yIHBvciBlbmNpbWEgZGVsIGJvdMOzbiAqL1xuLmJ0bi10cmFuc3BhcmVudDpob3ZlciB7XG4gIGNvbG9yOiAjMDA1NmIzO1xuICAvKiBDYW1iaWEgZWwgY29sb3IgZGVsIHRleHRvIGFsIHBhc2FyIGVsIGN1cnNvciBwb3IgZW5jaW1hICovXG59XG5cbi5jbG9zZUEge1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIC8qIEVzdGFibGVjZXIgcG9zaWNpw7NuIGFic29sdXRhIHBhcmEgcG9zaWNpb25hciBlbCBib3TDs24gKi9cbiAgdG9wOiAyNXB4O1xuICAvKiBEaXN0YW5jaWEgZGVzZGUgbGEgcGFydGUgc3VwZXJpb3IgKi9cbiAgbGVmdDogNzUwcHg7XG4gIC8qIERpc3RhbmNpYSBkZXNkZSBsYSBpenF1aWVyZGEgKi9cbn1cblxuLm1vZGFsLWhlYWRlckEge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjNmUwMDAwO1xuICBoZWlnaHQ6IDgwcHg7XG59XG5cbi5tb2RhbC10aXRsZUEge1xuICBjb2xvcjogI2ZmZjtcbiAgLyogQ29sb3IgZGVsIHRleHRvIGVuIGVsIGVuY2FiZXphZG8gKi9cbiAgcG9zaXRpb246IGFic29sdXRlO1xuICAvKiBFc3RhYmxlY2VyIHBvc2ljacOzbiBhYnNvbHV0YSBwYXJhIHBvc2ljaW9uYXIgZWwgYm90w7NuICovXG4gIHRvcDogMjBweDtcbiAgLyogRGlzdGFuY2lhIGRlc2RlIGxhIHBhcnRlIHN1cGVyaW9yICovXG4gIGxlZnQ6IDEycHg7XG59XG5cbi5iZyB7XG4gIGJhY2tncm91bmQtY29sb3I6ICM2ZTAwMDA7XG59Il19 */"] });
 
 
 /***/ }),
@@ -1754,12 +1785,6 @@ class ListaComponent {
     openDetalle(e) {
         this.estudent = e;
         this.router.navigate(['estudiante/actividades', this.estudent.id]);
-        // this.cargarActividades(this.estudent.id)
-        // this.modalService.open(content, {
-        //   backdrop: "static",
-        //   keyboard: false,
-        //   size: "lg",
-        // });
     }
     openModalA(content) {
         this.modalService.open(content, {
@@ -1769,7 +1794,7 @@ class ListaComponent {
         });
     }
     modal(content) {
-        this.modalService.open(content, { keyboard: false, size: "sm" });
+        this.modalService.open(content, { keyboard: false, size: "sm", backdrop: 'static', });
     }
     guardar() {
         this.estado = null;
@@ -1791,18 +1816,33 @@ class ListaComponent {
                 .guardar(this.estudiante)
                 .subscribe((resp) => {
                 if (resp) {
-                    sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire("Éxito", "Almacenado correctamente", "success");
+                    sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
+                        confirmButtonColor: "#a90000",
+                        title: 'Éxito',
+                        text: `Almacenado correctamente`,
+                        icon: 'success',
+                    });
                     this.reload();
                     this.modalService.dismissAll();
                     this.formulario.reset();
                     this.cargarDatos();
                 }
                 else {
-                    sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire("Ocurrio un problema", "", "warning");
+                    sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
+                        confirmButtonColor: "#a90000",
+                        title: 'Advertencia',
+                        text: `Ocurrio un problema`,
+                        icon: 'warning',
+                    });
                 }
             }, err => {
                 if (err.status == 400) {
-                    sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire("Error", "Ya existe el carnet", "warning");
+                    sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
+                        confirmButtonColor: "#a90000",
+                        title: 'Error',
+                        text: `Ya existe el carnet"`,
+                        icon: 'warning',
+                    });
                 }
             });
         }
@@ -1814,7 +1854,12 @@ class ListaComponent {
     eliminar(e) {
         this.estudent = e;
         if (this.estudent.usuario) {
-            sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire("Error", "No puede ser eliminado", "warning");
+            sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
+                confirmButtonColor: "#a90000",
+                title: 'Error',
+                text: "No puede ser eliminado",
+                icon: 'warning',
+            });
         }
         else {
             sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
@@ -1822,17 +1867,25 @@ class ListaComponent {
                 text: `Esto no se puede revertir`,
                 icon: "question",
                 showCancelButton: true,
+                confirmButtonColor: "#a90000",
+                cancelButtonColor: '#343a40',
                 confirmButtonText: "Sí, borrar",
                 cancelButtonText: "Cancelar",
             }).then((result) => {
                 if (result.isConfirmed) {
                     this.estudianteServicio.eliminar(e).subscribe((resp) => {
                         console.log(resp);
-                        sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire("Eliminado", "El registro ha sido eliminado", "success");
+                        sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
+                            confirmButtonColor: "#a90000",
+                            title: 'Eliminado',
+                            text: `El registro ha sido eliminado`,
+                            icon: 'success',
+                        });
                         this.reload();
                         this.cargarDatos();
                     }, (err) => {
                         sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
+                            confirmButtonColor: "#a90000",
                             icon: "error",
                             title: "Error",
                             text: err.error.msg,
@@ -1840,7 +1893,12 @@ class ListaComponent {
                     });
                 }
                 else if (result.isDenied) {
-                    sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire("Cambios no aplicados", "", "info");
+                    sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
+                        confirmButtonColor: "#a90000",
+                        title: "Información",
+                        text: `Cambios no aplicados`,
+                        icon: "info",
+                    });
                 }
             });
         }
@@ -1857,7 +1915,12 @@ class ListaComponent {
         }
         else {
             this.estudianteServicio.editar(this.estudiante).subscribe((resp) => {
-                sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire("Éxito", "Modificado correctamente", "success");
+                sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
+                    confirmButtonColor: "#a90000",
+                    title: 'Éxito',
+                    text: `Modificado correctamente`,
+                    icon: 'success',
+                });
                 this.reload();
                 this.modalService.dismissAll();
                 this.reset();
@@ -1865,6 +1928,7 @@ class ListaComponent {
             }, (err) => {
                 if (err.status === 400) {
                     sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
+                        confirmButtonColor: "#a90000",
                         title: "Advertencia",
                         text: `Teléfono ya registrado`,
                         icon: "warning",
@@ -1876,20 +1940,35 @@ class ListaComponent {
     guardarCarrera() {
         const c = new _models_estudiante__WEBPACK_IMPORTED_MODULE_0__.C(this.fCar.get("nombrecarrera").value);
         if (this.existeCarrera(c.nombrecarrera.toLowerCase())) {
-            sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire("Error", "Ya existe la carrera", "error");
+            sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
+                confirmButtonColor: "#a90000",
+                title: 'Error',
+                text: `Ya existe la carrera`,
+                icon: 'error',
+            });
             return;
         }
         else {
             this.estudianteServicio.guardarCarrera(c).subscribe((resp) => {
                 if (resp) {
-                    sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire("Éxito", "Almacenado correctamente", "success");
+                    sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
+                        confirmButtonColor: "#a90000",
+                        title: 'Éxito',
+                        text: `Almacenado correctamente`,
+                        icon: 'success',
+                    });
                     this.reload();
                     this.cargarDatos();
                     this.llenarCombo();
                     this.fCar.reset();
                 }
                 else {
-                    sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire("Ocurrio un problema", "", "warning");
+                    sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
+                        confirmButtonColor: "#a90000",
+                        title: 'Advertencia',
+                        text: `Ocurrio un problema`,
+                        icon: 'warning',
+                    });
                 }
             });
         }
@@ -1914,6 +1993,7 @@ class ListaComponent {
     imprimir() {
         if (this.pdf === "selec") {
             sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
+                confirmButtonColor: "#a90000",
                 icon: "error",
                 title: "Oops...",
                 text: "Seleccione una opción",

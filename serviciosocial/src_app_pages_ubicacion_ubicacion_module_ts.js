@@ -351,6 +351,7 @@ class ListarUbicacionComponent {
                 { searchable: false, targets: [4] },
                 /*         { width: "35%", targets: [1,3] },
                         { width: "10%", targets: [0, 2, 4] }, */
+                { responsivePriority: 1, targets: -1 },
             ],
             lengthMenu: [5, 10, 20, 50],
             destroy: true,
@@ -416,15 +417,23 @@ class ListarUbicacionComponent {
             text: `Esto no se puede revertir`,
             icon: 'question',
             showCancelButton: true,
+            confirmButtonColor: "#a90000",
+            cancelButtonColor: '#343a40',
             confirmButtonText: 'Sí, borrar',
             cancelButtonText: 'Cancelar'
         }).then((result) => {
             if (result.isConfirmed) {
                 this.ubicacionService.eliminar(ubicacion).subscribe(resp => {
-                    sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire('Eliminado', 'El registro ha sido eliminado', 'success');
+                    sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
+                        confirmButtonColor: "#a90000",
+                        title: 'Eliminado',
+                        text: `El registro ha sido eliminado`,
+                        icon: 'success',
+                    });
                     this.reload();
                 }, (err) => {
                     sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
+                        confirmButtonColor: "#a90000",
                         icon: 'error',
                         title: 'Error',
                         text: err.error.msg
@@ -432,7 +441,12 @@ class ListarUbicacionComponent {
                 });
             }
             else if (result.isDenied) {
-                sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire('Cambios no aplicados', '', 'info');
+                sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
+                    confirmButtonColor: "#a90000",
+                    title: "Información",
+                    text: `Cambios no aplicados`,
+                    icon: "info",
+                });
             }
         });
     }
@@ -455,17 +469,32 @@ class ListarUbicacionComponent {
         this.ubicacion = new _interfaces_Ubicacion__WEBPACK_IMPORTED_MODULE_0__.Ubicacion(null, new _interfaces_Ubicacion__WEBPACK_IMPORTED_MODULE_0__.Edificio(edificio, null, null), espacio, nivel);
         this.ubicacionService.guardar(this.ubicacion).subscribe((resp) => {
             if (resp.mensaje === "Error ubicacón existente") {
-                sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire('Registro existente', '', 'warning');
+                sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
+                    confirmButtonColor: "#a90000",
+                    title: "Advertencia",
+                    text: 'Registro existente',
+                    icon: "warning",
+                });
             }
             else {
                 if (resp) {
-                    sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire('Éxito', 'Almacenado correctamente', 'success');
+                    sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
+                        confirmButtonColor: "#a90000",
+                        title: 'Éxito',
+                        text: `Almacenado correctamente`,
+                        icon: 'success',
+                    });
                     this.reload();
                     this.modalService.dismissAll();
                     this.formulario.reset();
                 }
                 else {
-                    sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire('Ocurrio un problema', '', 'warning');
+                    sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
+                        confirmButtonColor: "#a90000",
+                        title: 'Advertencia',
+                        text: `Ocurrio un problema`,
+                        icon: 'warning',
+                    });
                 }
             }
         });
@@ -478,21 +507,37 @@ class ListarUbicacionComponent {
         this.ubicacionSeleccionada.nivel = this.formulario.controls['nivel'].value;
         this.ubicacionService.editar(this.ubicacionSeleccionada).subscribe((resp) => {
             if (resp.mensaje === "Error ubicacón existente") {
-                sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire('Registro existente', '', 'warning');
+                sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
+                    confirmButtonColor: "#a90000",
+                    title: "Advertencia",
+                    text: 'Registro existente',
+                    icon: "warning",
+                });
             }
             else {
                 if (resp) {
-                    sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire('Éxito', 'Modificado correctamente', 'success');
+                    sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
+                        confirmButtonColor: "#a90000",
+                        title: 'Éxito',
+                        text: `Modificado correctamente`,
+                        icon: 'success',
+                    });
                     this.reload();
                     this.modalService.dismissAll();
                     this.formulario.reset();
                 }
                 else {
-                    sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire('Ocurrio un problema', '', 'warning');
+                    sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
+                        confirmButtonColor: "#a90000",
+                        title: 'Advertencia',
+                        text: `Ocurrio un problema`,
+                        icon: 'warning',
+                    });
                 }
             }
         }, (err) => {
             sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
+                confirmButtonColor: "#a90000",
                 title: 'Error',
                 text: `Algo fallo`,
                 icon: 'error',

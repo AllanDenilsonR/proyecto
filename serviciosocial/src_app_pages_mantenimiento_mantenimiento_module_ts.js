@@ -118,7 +118,7 @@ function ListarMantenimientoComponent_h5_14_Template(rf, ctx) { if (rf & 1) {
 } if (rf & 2) {
     const ctx_r0 = _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵnextContext"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵtextInterpolate2"](" Serie: ", ctx_r0.equipo.numserie, " ", ctx_r0.equipo.categoria.nombre, " ");
+    _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵtextInterpolate2"](" Serie: ", ctx_r0.equipo.numserie, " - Categor\u00EDa: ", ctx_r0.equipo.categoria.nombre, " ");
 } }
 function ListarMantenimientoComponent_tr_33_Template(rf, ctx) { if (rf & 1) {
     const _r9 = _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵgetCurrentView"]();
@@ -372,6 +372,7 @@ class ListarMantenimientoComponent {
                 { searchable: false, targets: [4] },
                 /*         { width: "35%", targets: [1,3] },
                         { width: "10%", targets: [0, 2, 4] }, */
+                { responsivePriority: 1, targets: -1 },
             ],
             lengthMenu: [5, 10, 20, 50],
             destroy: true,
@@ -429,19 +430,36 @@ class ListarMantenimientoComponent {
             text: `Esto no se puede revertir`,
             icon: 'question',
             showCancelButton: true,
+            confirmButtonColor: "#a90000",
+            cancelButtonColor: '#343a40',
             confirmButtonText: 'Sí, borrar',
             cancelButtonText: 'Cancelar'
         }).then((result) => {
             if (result.isConfirmed) {
                 this.mantenimientoServicio.eliminar(mantenimiento).subscribe(resp => {
-                    sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire('Eliminado', 'El registro ha sido eliminado', 'success');
+                    sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire({
+                        confirmButtonColor: "#a90000",
+                        title: 'Eliminado',
+                        text: `El registro ha sido eliminado`,
+                        icon: 'success',
+                    });
                     this.reload();
                 }, (err) => {
-                    sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire('Error', 'El registro no puede ser eliminado', 'warning');
+                    sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire({
+                        confirmButtonColor: "#a90000",
+                        title: 'Error',
+                        text: 'El registro no puede ser eliminado',
+                        icon: 'warning',
+                    });
                 });
             }
             else if (result.isDenied) {
-                sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire('Cambios no aplicados', '', 'info');
+                sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire({
+                    confirmButtonColor: "#a90000",
+                    title: "Información",
+                    text: `Cambios no aplicados`,
+                    icon: "info",
+                });
             }
         });
     }
@@ -471,13 +489,23 @@ class ListarMantenimientoComponent {
         this.mantenimiento = new _interfaces_mantenimiento__WEBPACK_IMPORTED_MODULE_1__.Mantenimiento(null, fechainicio, fechafin, descripcion, this.equipo);
         this.mantenimientoServicio.guardar(this.mantenimiento).subscribe((resp) => {
             if (resp) {
-                sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire('Éxito', 'Almacenado correctamente', 'success');
+                sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire({
+                    confirmButtonColor: "#a90000",
+                    title: 'Éxito',
+                    text: `Almacenado correctamente`,
+                    icon: 'success',
+                });
                 this.modalService.dismissAll();
                 this.formulario.reset();
                 this.reload();
             }
             else {
-                sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire('Ocurrio un problema', '', 'warning');
+                sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire({
+                    confirmButtonColor: "#a90000",
+                    title: 'Advertencia',
+                    text: `Ocurrio un problema`,
+                    icon: 'warning',
+                });
             }
         });
         return Object.values(this.formulario.controls)
@@ -488,13 +516,19 @@ class ListarMantenimientoComponent {
         this.mantenimientoSeleccionado.fechafin = this.formulario.controls['fechafin'].value;
         this.mantenimientoSeleccionado.descripcion = this.formulario.controls['descripcion'].value;
         this.mantenimientoServicio.editar(this.mantenimientoSeleccionado).subscribe(resp => {
-            sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire('Éxito', 'Modificado correctamente', 'success');
+            sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire({
+                confirmButtonColor: "#a90000",
+                title: 'Éxito',
+                text: `Modificado correctamente`,
+                icon: 'success',
+            });
             this.modalService.dismissAll();
             this.mantenimientoSeleccionado = null;
             this.reset();
             this.reload();
         }, (err) => {
             sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire({
+                confirmButtonColor: "#a90000",
                 title: 'Error',
                 text: `Algo fallo`,
                 icon: 'error',
@@ -532,7 +566,7 @@ ListarMantenimientoComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORT
     } if (rf & 2) {
         let _t;
         _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵqueryRefresh"](_t = _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵloadQuery"]()) && (ctx.dtElement = _t.first);
-    } }, decls: 38, vars: 5, consts: [[1, "container-fluid"], ["title", "Mantenimiento", 3, "breadcrumbItems"], [1, "row"], [1, "col-12"], [1, "card"], [1, "card-body"], [1, "col-sm-12", "text-end"], [1, "text-sm-end", "mb-3"], ["type", "button", "data-toggle", "tooltip", "ngbTooltip", "Ayuda", "data-placement", "end", 1, "btn", "btn-info", "btn-icon", "rounded-circle", "btn-transparent", 2, "margin-right", "+35px", 3, "click"], [1, "fa", "fa-question-circle", "fa-lg"], [1, "row", "mb-2"], [1, "col-sm-12"], [4, "ngIf"], [1, "btn", "btn-info", "btn-rounded", "bg-gradient", 3, "click"], [1, "mdi", "mdi-plus", "me-1"], ["datatable", "", 1, "table", "table-nowrap", 3, "dtOptions", "dtTrigger"], [1, ""], [4, "ngFor", "ngForOf"], ["role", "document"], ["modal", ""], ["ayuda", ""], ["scope", "row"], ["ngbTooltip", "Editar", 1, "btn", "btn-outline-info", "btn-sm", "dripicons-document-edit", 3, "click"], ["ngbTooltip", "Eliminar", 1, "btn", "btn-outline-danger", "btn-sm", "dripicons-cross", 3, "click"], ["id", "modalMantenimiento", "tabindex", "-1", "aria-labelledby", "exampleModalLabel", "aria-hidden", "true"], [1, "modal-header"], ["id", "exampleModalLabel", 1, "modal-title"], ["type", "button", "aria-hidden", "true", 1, "btn-close", 3, "click"], [3, "formGroup", "ngSubmit"], [1, "modal-body"], [1, "text-danger", "mb-4"], [1, "col-md-6"], [1, "mb-3"], [1, "text-danger"], ["type", "date", "name", "fechainicio", "autocomplete", "off", "formControlName", "fechainicio", 1, "form-control", 3, "ngModel"], [1, "invalid-feedback"], ["type", "date", "name", "fechafin", "autocomplete", "off", "formControlName", "fechafin", 1, "form-control", 3, "ngModel", "change"], [1, "col-md-12"], ["name", "descripcion", "autocomplete", "off", "formControlName", "descripcion", 1, "form-control", 3, "ngModel"], [1, "modal-footer", "mt-5"], ["type", "button", 1, "btn", "btn-dark", 3, "click"], ["type", "submit", "id", "btn-save-event", 1, "btn", "btn-info", 3, "disabled"], [1, "modal-header", "bg"], [1, "modal-title", "text-white"], ["type", "button", "aria-label", "Close", 1, "close", 3, "click"], [1, "modal-body", "text-justify"], [2, "margin-bottom", "15px"], [1, "fs-5"], [2, "font-size", "15px"], [1, "modal-footer"]], template: function ListarMantenimientoComponent_Template(rf, ctx) { if (rf & 1) {
+    } }, decls: 38, vars: 5, consts: [[1, "container-fluid"], ["title", "Mantenimiento", 3, "breadcrumbItems"], [1, "row"], [1, "col-12"], [1, "card"], [1, "card-body"], [1, "col-sm-12", "text-end"], [1, "text-sm-end", "mb-3"], ["type", "button", "data-toggle", "tooltip", "ngbTooltip", "Ayuda", "data-placement", "end", 1, "btn", "btn-info", "btn-icon", "rounded-circle", "btn-transparent", 2, "margin-right", "+35px", 3, "click"], [1, "fa", "fa-question-circle", "fa-lg"], [1, "row", "mb-2"], [1, "col-sm-12"], [4, "ngIf"], [1, "btn", "btn-info", "btn-rounded", "bg-gradient", 3, "click"], [1, "mdi", "mdi-plus", "me-1"], ["datatable", "", "width", "100%", 1, "row-border", "hover", 3, "dtOptions", "dtTrigger"], [1, ""], [4, "ngFor", "ngForOf"], ["role", "document"], ["modal", ""], ["ayuda", ""], ["scope", "row"], ["ngbTooltip", "Editar", 1, "btn", "btn-outline-info", "btn-sm", "dripicons-document-edit", 3, "click"], ["ngbTooltip", "Eliminar", 1, "btn", "btn-outline-danger", "btn-sm", "dripicons-cross", 3, "click"], ["id", "modalMantenimiento", "tabindex", "-1", "aria-labelledby", "exampleModalLabel", "aria-hidden", "true"], [1, "modal-header"], ["id", "exampleModalLabel", 1, "modal-title"], ["type", "button", "aria-hidden", "true", 1, "btn-close", 3, "click"], [3, "formGroup", "ngSubmit"], [1, "modal-body"], [1, "text-danger", "mb-4"], [1, "col-md-6"], [1, "mb-3"], [1, "text-danger"], ["type", "date", "name", "fechainicio", "autocomplete", "off", "formControlName", "fechainicio", 1, "form-control", 3, "ngModel"], [1, "invalid-feedback"], ["type", "date", "name", "fechafin", "autocomplete", "off", "formControlName", "fechafin", 1, "form-control", 3, "ngModel", "change"], [1, "col-md-12"], ["name", "descripcion", "autocomplete", "off", "formControlName", "descripcion", 1, "form-control", 3, "ngModel"], [1, "modal-footer", "mt-5"], ["type", "button", 1, "btn", "btn-dark", 3, "click"], ["type", "submit", "id", "btn-save-event", 1, "btn", "btn-info", 3, "disabled"], [1, "modal-header", "bg"], [1, "modal-title", "text-white"], ["type", "button", "aria-label", "Close", 1, "close", 3, "click"], [1, "modal-body", "text-justify"], [2, "margin-bottom", "15px"], [1, "fs-5"], [2, "font-size", "15px"], [1, "modal-footer"]], template: function ListarMantenimientoComponent_Template(rf, ctx) { if (rf & 1) {
         const _r28 = _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵgetCurrentView"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelement"](0, "app-loader");
         _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementStart"](1, "div", 0);

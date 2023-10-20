@@ -610,6 +610,7 @@ class ListaActividadesComponent {
         else {
             console.log("campos vacios");
             sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire({
+                confirmButtonColor: "#a90000",
                 position: 'center',
                 title: 'Faltan datos en el formulario',
                 text: 'completar campos requeridos',
@@ -622,13 +623,23 @@ class ListaActividadesComponent {
         const estado = "Activo";
         this.actividadesE = new _models_actividad__WEBPACK_IMPORTED_MODULE_0__.Actividad(estado, actividad, this.userauth.id);
         this.actividadServicio.nuevaActividad(this.actividadesE).subscribe((response) => {
-            sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire('Éxito', 'Almacenado correctamente', 'success');
+            sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire({
+                confirmButtonColor: "#a90000",
+                title: 'Éxito',
+                text: `Almacenado correctamente`,
+                icon: 'success',
+            });
             this.formActividad.reset();
             this.reload();
             this.getActividadesRegistradas();
         }, (err) => {
             //consoleerro
-            sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire('Ocurrio un problema', '', 'warning');
+            sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire({
+                confirmButtonColor: "#a90000",
+                title: 'Advertencia',
+                text: `Ocurrio un problema`,
+                icon: 'warning',
+            });
         });
     }
     editandoActividadForm() {
@@ -638,13 +649,23 @@ class ListaActividadesComponent {
             const actividadE = this.formActividad.get('descripcion').value;
             this.actividadModi = new _models_actividad__WEBPACK_IMPORTED_MODULE_0__.Actividad(estado, actividadE, this.userauth.id, id);
             this.actividadServicio.editarActividad(this.actividadModi).subscribe((response) => {
-                sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire('Éxito', 'Modificado correctamente', 'success');
+                sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire({
+                    confirmButtonColor: "#a90000",
+                    title: 'Éxito',
+                    text: `Modificado correctamente`,
+                    icon: 'success',
+                });
                 this.formActividad.reset();
                 this.reload();
                 this.getActividadesRegistradas();
             }, (err) => {
                 //consoleerro
-                sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire('Ocurrio un problema', '', 'warning');
+                sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire({
+                    confirmButtonColor: "#a90000",
+                    title: 'Advertencia',
+                    text: `Ocurrio un problema`,
+                    icon: 'warning',
+                });
             });
         }
         else {
@@ -654,13 +675,23 @@ class ListaActividadesComponent {
             const actividadE = this.formActividad.get('descripcion').value;
             this.actividadModi = new _models_actividad__WEBPACK_IMPORTED_MODULE_0__.Actividad(estado, actividadE, this.userauth.id, id);
             this.actividadServicio.editarActividad(this.actividadModi).subscribe((response) => {
-                sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire('Éxito', 'Modificado correctamente', 'success');
+                sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire({
+                    confirmButtonColor: "#a90000",
+                    title: 'Éxito',
+                    text: `Modificado correctamente`,
+                    icon: 'success',
+                });
                 this.formActividad.reset();
                 this.reload();
                 this.getActividadesRegistradas();
             }, (err) => {
                 //consoleerro
-                sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire('Ocurrio un problema', '', 'warning');
+                sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire({
+                    confirmButtonColor: "#a90000",
+                    title: 'Advertencia',
+                    text: `Ocurrio un problema`,
+                    icon: 'warning',
+                });
             });
         }
     }
@@ -1289,19 +1320,39 @@ class ListaDetalleActividadComponent {
                                     //guardando en tabla ejecucion
                                     this.reload();
                                     this.guardarEjecucion();
-                                    sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire('Éxito', 'Almacenado correctamente', 'success');
+                                    sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire({
+                                        confirmButtonColor: "#a90000",
+                                        title: 'Éxito',
+                                        text: `Almacenado correctamente`,
+                                        icon: 'success',
+                                    });
                                 }, (err) => {
                                     //consoleerro
-                                    sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire('Ocurrio un problema', '', 'warning');
+                                    sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire({
+                                        confirmButtonColor: "#a90000",
+                                        title: 'Advertencia',
+                                        text: `Ocurrio un problema`,
+                                        icon: 'warning',
+                                    });
                                 });
                             }
                             else {
-                                sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire('Información', 'No es posible guardar un nuevo detalle, porque existe uno que está finalizado debe editar su estado', 'info');
+                                sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire({
+                                    confirmButtonColor: "#a90000",
+                                    title: 'Información',
+                                    text: 'No es posible guardar un nuevo detalle, porque existe uno que está finalizado debe editar su estado',
+                                    icon: 'info'
+                                });
                             }
                         });
                     }
                     else {
-                        sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire('Información', 'No es posible guardar un nuevo detalle, porque existe uno que está siendo ejecutado debe editar su estado', 'info');
+                        sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire({
+                            confirmButtonColor: "#a90000",
+                            title: 'Información',
+                            text: 'No es posible guardar un nuevo detalle, porque existe uno que está siendo ejecutado debe editar su estado',
+                            icon: 'info'
+                        });
                     }
                 });
             }
@@ -1330,6 +1381,8 @@ class ListaDetalleActividadComponent {
                 se concluye que la actividad finaliza por completo.`,
                         icon: 'question',
                         showCancelButton: true,
+                        confirmButtonColor: "#a90000",
+                        cancelButtonColor: '#343a40',
                         confirmButtonText: 'Si, entendido',
                         cancelButtonText: 'Cancelar'
                     }).then((result) => {
@@ -1338,7 +1391,12 @@ class ListaDetalleActividadComponent {
                                 this.formDetalleActividad.reset();
                                 this.accionesDeActulizacionFormulario();
                                 //this.myTimeIni=new Date();
-                                sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire('Éxito', 'Modificado correctamente', 'success');
+                                sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire({
+                                    confirmButtonColor: "#a90000",
+                                    title: 'Éxito',
+                                    text: `Modificado correctamente`,
+                                    icon: 'success',
+                                });
                                 //confirmando si los detalles de la actividad tiene un estado almenos un estado finalizado
                                 //de ser asi en la lista tiene verdadero
                                 this.detalleConfirmacionService.confirmarEstadoActividad(this.idActividad).subscribe((res) => {
@@ -1357,11 +1415,21 @@ class ListaDetalleActividadComponent {
                                 this.reload();
                             }, (err) => {
                                 //consoleerro
-                                sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire('Ocurrio un problema', '', 'warning');
+                                sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire({
+                                    confirmButtonColor: "#a90000",
+                                    title: 'Advertencia',
+                                    text: `Ocurrio un problema`,
+                                    icon: 'warning',
+                                });
                             });
                         }
                         else if (result.isDenied) {
-                            sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire('Cambios no aplicados', '', 'info');
+                            sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire({
+                                confirmButtonColor: "#a90000",
+                                title: "Información",
+                                text: `Cambios no aplicados`,
+                                icon: "info",
+                            });
                         }
                     });
                 }
@@ -1371,7 +1439,12 @@ class ListaDetalleActividadComponent {
                         this.formDetalleActividad.reset();
                         this.accionesDeActulizacionFormulario();
                         // this.myTimeIni=new Date();
-                        sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire('Éxito', 'Modificado correctamente', 'success');
+                        sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire({
+                            confirmButtonColor: "#a90000",
+                            title: 'Éxito',
+                            text: `Modificado correctamente`,
+                            icon: 'success',
+                        });
                         //confirmando si los detalles de la actividad tiene un estado almenos un estado finalizado
                         //de ser asi en la lista tiene verdadero
                         this.detalleConfirmacionService.confirmarEstadoActividad(this.idActividad).subscribe((res) => {
@@ -1390,14 +1463,19 @@ class ListaDetalleActividadComponent {
                         this.reload();
                     }, (err) => {
                         //consoleerro
-                        sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire('Ocurrio un problema', '', 'warning');
+                        sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire({
+                            confirmButtonColor: "#a90000",
+                            title: 'Advertencia',
+                            text: `Ocurrio un problema`,
+                            icon: 'warning',
+                        });
                     });
                 }
             }
         }
         else {
-            console.log("campos vacios");
             sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire({
+                confirmButtonColor: "#a90000",
                 position: 'center',
                 title: 'Faltan datos en el formulario',
                 text: 'completar campos requeridos',
@@ -1412,7 +1490,12 @@ class ListaDetalleActividadComponent {
         this.ejecucion = new _models_detalleactividad__WEBPACK_IMPORTED_MODULE_1__.Ejecucion(detalleactividades, actividadj);
         this.detalleActividadService.nuevoEjecucion(this.ejecucion).subscribe((resp) => {
         }, (err) => {
-            sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire('Ocurrio un problema en ejecucion', '', 'warning');
+            sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire({
+                confirmButtonColor: "#a90000",
+                title: 'Advertencia',
+                text: `Ocurrio un problema en ejecucion`,
+                icon: 'warning',
+            });
         });
     }
     eliminandoconAlert(idDetalle) {
@@ -1421,12 +1504,19 @@ class ListaDetalleActividadComponent {
             text: `Esto no se puede revertir`,
             icon: 'question',
             showCancelButton: true,
+            confirmButtonColor: "#a90000",
+            cancelButtonColor: '#343a40',
             confirmButtonText: 'Si, borrar',
             cancelButtonText: 'Cancelar'
         }).then((result) => {
             if (result.isConfirmed) {
                 this.detalleActividadService.deleteDetalleActividadEstu(idDetalle).subscribe((res) => {
-                    sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire('Eliminado', 'El registro ha sido eliminado', 'success');
+                    sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire({
+                        confirmButtonColor: "#a90000",
+                        title: 'Eliminado',
+                        text: `El registro ha sido eliminado`,
+                        icon: 'success',
+                    });
                     this.formDetalleActividad.reset();
                     this.accionesDeActulizacionFormulario();
                     // this.myTimeIni=new Date();
@@ -1434,7 +1524,12 @@ class ListaDetalleActividadComponent {
                 });
             }
             else if (result.isDenied) {
-                sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire('Cambios no aplicados', '', 'info');
+                sweetalert2__WEBPACK_IMPORTED_MODULE_3___default().fire({
+                    confirmButtonColor: "#a90000",
+                    title: "Información",
+                    text: `Cambios no aplicados`,
+                    icon: "info",
+                });
             }
         });
     }

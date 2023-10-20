@@ -1074,6 +1074,7 @@ class ListaequipoComponent {
                 { orderable: false, targets: [1] },
                 { searchable: false, targets: [1] },
                 // { width: "50%", targets: [0, 1] },
+                { responsivePriority: 1, targets: 2 },
                 { responsivePriority: 1, targets: -1 },
             ],
             lengthMenu: [5, 10, 20, 50],
@@ -1146,18 +1147,29 @@ class ListaequipoComponent {
             this.equipo = new _models_equipo__WEBPACK_IMPORTED_MODULE_2__.Equipo(numinventario, numserie, marca, modelo, anio, descripcion, ip, estado, c, u, usuario);
             this.equipoService.guardar(this.equipo).subscribe((resp) => {
                 if (resp) {
-                    sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire('Éxito', 'Almacenado correctamente', 'success');
+                    sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
+                        confirmButtonColor: "#a90000",
+                        title: 'Éxito',
+                        text: `Almacenado correctamente`,
+                        icon: 'success',
+                    });
                     this.formulario.reset();
                     this.modalService.dismissAll();
                     this.reload();
                 }
                 else {
-                    sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire('Ocurrio un problema', '', 'warning');
+                    sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
+                        confirmButtonColor: "#a90000",
+                        title: 'Advertencia',
+                        text: `Ocurrio un problema`,
+                        icon: 'warning',
+                    });
                 }
             });
         }
         else {
             sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
+                confirmButtonColor: "#a90000",
                 position: 'center',
                 title: 'Faltan datos en el formulario',
                 text: 'completar campos requeridos',
@@ -1197,12 +1209,18 @@ class ListaequipoComponent {
                 this.equipoE.ubicacione.id = this.formulario.controls['ubicacione'].value;
                 this.equipoE.usuarioe.id = this.user.id;
                 this.equipoService.editarEquipo(this.equipoE).subscribe(resp => {
-                    sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire('Éxito', 'Modificado correctamente', 'success');
+                    sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
+                        confirmButtonColor: "#a90000",
+                        title: 'Éxito',
+                        text: `Modificado correctamente`,
+                        icon: 'success',
+                    });
                     this.reload();
                     this.formulario.reset();
                     this.modalService.dismissAll();
                 }, (err) => {
                     sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
+                        confirmButtonColor: "#a90000",
                         title: 'Error',
                         text: `Algo fallo`,
                         icon: 'error',
@@ -1211,6 +1229,7 @@ class ListaequipoComponent {
             }
             else {
                 sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
+                    confirmButtonColor: "#a90000",
                     position: 'center',
                     title: 'Faltan datos en el formulario',
                     text: 'completar campos requeridos',
@@ -1233,12 +1252,18 @@ class ListaequipoComponent {
                 this.equipoE.ubicacione.id = this.formulario.controls['ubicacione'].value;
                 this.equipoE.usuarioe.id = this.user.id;
                 this.equipoService.editarEquipo(this.equipoE).subscribe(resp => {
-                    sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire('Éxito', 'Modificado correctamente', 'success');
+                    sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
+                        confirmButtonColor: "#a90000",
+                        title: 'Éxito',
+                        text: `Modificado correctamente`,
+                        icon: 'success',
+                    });
                     this.reload();
                     this.formulario.reset();
                     this.modalService.dismissAll();
                 }, (err) => {
                     sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
+                        confirmButtonColor: "#a90000",
                         title: 'Error',
                         text: `Algo fallo`,
                         icon: 'error',
@@ -1247,6 +1272,7 @@ class ListaequipoComponent {
             }
             else {
                 sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
+                    confirmButtonColor: "#a90000",
                     position: 'center',
                     title: 'Faltan datos en el formulario',
                     text: 'completar campos requeridos',
@@ -1255,7 +1281,12 @@ class ListaequipoComponent {
             }
         }
         else {
-            sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire('Error', 'No se puede cambiar el estado hasta que pasen al menos 4 años desde la compra.', 'error');
+            sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
+                confirmButtonColor: "#a90000",
+                title: 'Error',
+                text: 'No se puede cambiar el estado hasta que pasen al menos 4 años desde la compra.',
+                icon: 'error',
+            });
         }
     }
     editarEstado() {
@@ -1270,12 +1301,18 @@ class ListaequipoComponent {
             this.equipoE.id = this.equipoE.id;
             this.equipoE.estado = this.formulario.controls['estado'].value;
             this.equipoService.editarEquipo(this.equipoE).subscribe(resp => {
-                sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire('Éxito', 'Estado Modificado correctamente', 'success');
+                sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
+                    confirmButtonColor: "#a90000",
+                    title: 'Éxito',
+                    text: 'Estado Modificado correctamente',
+                    icon: 'success',
+                });
                 this.reload();
                 this.formulario.reset();
                 this.modalService.dismissAll();
             }, (err) => {
                 sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
+                    confirmButtonColor: "#a90000",
                     title: 'Error',
                     text: `Algo fallo`,
                     icon: 'error',
@@ -1287,12 +1324,18 @@ class ListaequipoComponent {
             this.equipoE.id = this.equipoE.id;
             this.equipoE.estado = this.formulario.controls['estado'].value;
             this.equipoService.editarEquipo(this.equipoE).subscribe(resp => {
-                sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire('Éxito', 'Estado Modificado correctamente', 'success');
+                sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
+                    confirmButtonColor: "#a90000",
+                    title: 'Éxito',
+                    text: 'Estado Modificado correctamente',
+                    icon: 'success',
+                });
                 this.reload();
                 this.formulario.reset();
                 this.modalService.dismissAll();
             }, (err) => {
                 sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
+                    confirmButtonColor: "#a90000",
                     title: 'Error',
                     text: `Algo fallo`,
                     icon: 'error',
@@ -1300,11 +1343,16 @@ class ListaequipoComponent {
             });
         }
         else {
-            sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire('Error', 'No se puede cambiar el estado hasta que pasen al menos 4 años desde la compra.', 'error');
+            sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
+                confirmButtonColor: "#a90000",
+                title: 'Error',
+                text: 'No se puede cambiar el estado hasta que pasen al menos 4 años desde la compra.',
+                icon: 'error',
+            });
         }
     }
     openModal(content) {
-        this.modalService.open(content, { size: 'lg', backdrop: 'static', keyboard: false });
+        this.modalService.open(content, { size: 'xl', backdrop: 'static', keyboard: false });
     }
     esCampoValido(campo) {
         const validarCampo = this.formulario.get(campo);

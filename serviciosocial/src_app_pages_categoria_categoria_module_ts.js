@@ -188,12 +188,12 @@ function ListarCategoriaComponent_ng_template_42_Template(rf, ctx) { if (rf & 1)
     _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementStart"](4, "div", 35);
-    _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementStart"](5, "div", 36);
-    _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementStart"](6, "h2", 37);
+    _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementStart"](5, "div");
+    _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementStart"](6, "h2", 36);
     _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵtext"](7, "Ventana de Informaci\u00F3n de Categor\u00EDa");
     _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementStart"](8, "ul", 38);
+    _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementStart"](8, "ul", 37);
     _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementStart"](9, "p");
     _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵtext"](10, "Muestra una tabla que contiene una lista de todas las categor\u00EDas almacenadas.");
     _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementEnd"]();
@@ -202,21 +202,21 @@ function ListarCategoriaComponent_ng_template_42_Template(rf, ctx) { if (rf & 1)
     _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵtext"](13, " Permite incluir una nueva categor\u00EDa a la lista. Al hacer clic en este bot\u00F3n, podr\u00E1 ingresar el nombre de la categor\u00EDa para poder ser almacenada la informaci\u00F3n en la base de datos. ");
     _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementStart"](14, "ul", 38);
+    _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementStart"](14, "ul", 37);
     _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementStart"](15, "h4");
     _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵtext"](16, "Bot\u00F3n Editar:");
     _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵtext"](17, " Permite actualizar el nombre de la categor\u00EDa, facilitando la gesti\u00F3n eficiente de la informaci\u00F3n. ");
     _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementStart"](18, "ul", 38);
+    _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementStart"](18, "ul", 37);
     _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementStart"](19, "h4");
     _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵtext"](20, "Bot\u00F3n Eliminar:");
     _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵtext"](21, " Permite eliminar de manera permanente la categor\u00EDa. Esta acci\u00F3n suele ser irreversible, lo que significa que una vez que se presiona el bot\u00F3n \"Eliminar\" y se confirma la acci\u00F3n, el elemento seleccionado se borra y no se prodra revertir dicha acci\u00F3n. ");
     _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementStart"](22, "div", 39);
-    _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementStart"](23, "button", 40);
+    _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementStart"](22, "div", 38);
+    _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementStart"](23, "button", 39);
     _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵlistener"]("click", function ListarCategoriaComponent_ng_template_42_Template_button_click_23_listener() { const restoredCtx = _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵrestoreView"](_r12); const modal_r10 = restoredCtx.$implicit; return modal_r10.close("Close click"); });
     _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵtext"](24, "Cerrar");
     _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementEnd"]();
@@ -282,19 +282,34 @@ class ListarCategoriaComponent {
     guardar() {
         this.categoria = new _models_categoria__WEBPACK_IMPORTED_MODULE_0__.Categoria(this.formulario.get('nombre').value);
         if (this.existe(this.categoria.nombre.toLowerCase() || this.categoria.nombre.toUpperCase())) {
-            sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire('Error', 'Ya existe la categoría', 'error');
+            sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire({
+                confirmButtonColor: "#a90000",
+                title: 'Error',
+                text: 'Ya existe la categoría',
+                icon: 'error',
+            });
             this.formulario.reset();
             this.reload();
         }
         else {
             this.categoriaService.guardarCategoria(this.categoria).subscribe(resp => {
                 if (resp) {
-                    sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire('Éxito', 'Almacenado correctamente', 'success');
+                    sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire({
+                        confirmButtonColor: "#a90000",
+                        title: 'Éxito',
+                        text: `Almacenado correctamente`,
+                        icon: 'success',
+                    });
                     this.reload();
                     this.formulario.reset();
                 }
                 else {
-                    sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire('Ocurrio un problema', '', 'warning');
+                    sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire({
+                        confirmButtonColor: "#a90000",
+                        title: 'Advertencia',
+                        text: `Ocurrio un problema`,
+                        icon: 'warning',
+                    });
                 }
             });
         }
@@ -309,11 +324,17 @@ class ListarCategoriaComponent {
     editar() {
         this.categoria.nombre = this.formulario.controls['nombre'].value;
         this.categoriaService.editar(this.categoria).subscribe(resp => {
-            sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire('Éxito', 'Modificado correctamente', 'success');
+            sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire({
+                confirmButtonColor: "#a90000",
+                title: 'Éxito',
+                text: `Modificado correctamente`,
+                icon: 'success',
+            });
             this.reload();
             this.formulario.get('nombre').setValue("");
         }, (err) => {
             sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire({
+                confirmButtonColor: "#a90000",
                 title: 'Error',
                 text: `Ya existe la categoría`,
                 icon: 'error',
@@ -327,19 +348,40 @@ class ListarCategoriaComponent {
             text: `Esto no se puede revertir`,
             icon: 'question',
             showCancelButton: true,
+            confirmButtonColor: "#a90000",
+            cancelButtonColor: '#343a40',
             confirmButtonText: 'Sí, borrar',
             cancelButtonText: 'Cancelar'
         }).then((result) => {
             if (result.isConfirmed) {
-                sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire('Error', 'El registro no puede ser eliminado', 'warning');
-                this.categoriaService.eliminar(x.id).subscribe(response => {
-                    sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire('Eliminado', 'El registro ha sido eliminado', 'success');
-                    this.formulario.reset();
-                    this.reload();
-                });
+                if (this.verificar(x.id)) {
+                    sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire({
+                        confirmButtonColor: "#a90000",
+                        title: 'Error',
+                        text: `El registro no puede ser eliminado`,
+                        icon: 'warning',
+                    });
+                }
+                else {
+                    this.categoriaService.eliminar(x.id).subscribe(response => {
+                        sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire({
+                            confirmButtonColor: "#a90000",
+                            title: 'Eliminado',
+                            text: `El registro ha sido eliminado`,
+                            icon: 'success',
+                        });
+                        this.formulario.reset();
+                        this.reload();
+                    });
+                }
             }
             else if (result.isDenied) {
-                sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire('Cambios no aplicados', '', 'info');
+                sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire({
+                    confirmButtonColor: "#a90000",
+                    title: "Información",
+                    text: `Cambios no aplicados`,
+                    icon: "info",
+                });
             }
         });
     }
@@ -362,8 +404,10 @@ class ListarCategoriaComponent {
     }
     //PARA LA AYUDA
     openModalA(content) {
-        this.modalService.open(content, { keyboard: false,
-            scrollable: true, size: 'lg' });
+        this.modalService.open(content, {
+            keyboard: false,
+            scrollable: true, size: 'lg'
+        });
     }
 }
 ListarCategoriaComponent.ɵfac = function ListarCategoriaComponent_Factory(t) { return new (t || ListarCategoriaComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵdirectiveInject"](_ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_10__.NgbModal), _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵdirectiveInject"](_service_categoria_service__WEBPACK_IMPORTED_MODULE_4__.CategoriaService), _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵdirectiveInject"](_angular_forms__WEBPACK_IMPORTED_MODULE_9__.FormBuilder)); };
@@ -372,7 +416,7 @@ ListarCategoriaComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_M
     } if (rf & 2) {
         let _t;
         _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵqueryRefresh"](_t = _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵloadQuery"]()) && (ctx.dtElement = _t.first);
-    } }, decls: 44, vars: 10, consts: [[1, "container-fluid"], ["title", "Categoria", 3, "breadcrumbItems"], [1, "row"], [1, "col-12"], [1, "card"], [1, "card-body"], [1, "row", "mb-2"], [1, "col-sm-12"], [1, "text-sm-end", "mb-3"], ["type", "button", "data-toggle", "tooltip", "ngbTooltip", "Ayuda", "data-placement", "end", 1, "btn", "btn-info", "btn-icon", "rounded-circle", "btn-transparent", 2, "margin-right", "+35px", 3, "click"], [1, "fa", "fa-question-circle", "fa-lg"], [1, "col-3"], [1, "text-danger", "mb-4"], [1, "col-9"], [3, "formGroup", "ngSubmit"], [1, "row", "mb-5"], [1, "col", "text-start"], [1, "text-danger"], ["type", "text", "name", "nombre", "autocomplete", "off", "formControlName", "nombre", 1, "form-control"], [1, "invalid-feedback"], [4, "ngIf"], [1, "col", "mt-4", "ms-4"], [1, "btn", "btn-info", "bg-gradient", 3, "disabled"], ["datatable", "", "width", "100%", 1, "row-border", "hover", 3, "dtOptions", "dtTrigger"], [1, "table", "bg-light", "bg-gradient"], [1, ""], [1, "align-middle"], [4, "ngFor", "ngForOf"], ["ayudaCategoria", ""], ["scope", "row"], ["ngbTooltip", "Editar", 1, "btn", "btn-outline-info", "btn-sm", "dripicons-document-edit", 3, "click"], ["ngbTooltip", "Eliminar", 1, "btn", "btn-outline-danger", "btn-sm", "dripicons-cross", 3, "click"], [1, "modal-headerA"], [1, "modal-titleA"], ["type", "button", "aria-label", "Close", 1, "closeA", 3, "click"], [1, "modal-body"], [2, "text-align", "justify"], [2, "margin-bottom", "20px"], [2, "font-size", "15px"], [1, "modal-footer"], ["type", "button", 1, "btn", "btn-dark", 3, "click"]], template: function ListarCategoriaComponent_Template(rf, ctx) { if (rf & 1) {
+    } }, decls: 44, vars: 10, consts: [[1, "container-fluid"], ["title", "Categoria", 3, "breadcrumbItems"], [1, "row"], [1, "col-12"], [1, "card"], [1, "card-body"], [1, "row", "mb-2"], [1, "col-sm-12"], [1, "text-sm-end", "mb-3"], ["type", "button", "data-toggle", "tooltip", "ngbTooltip", "Ayuda", "data-placement", "end", 1, "btn", "btn-info", "btn-icon", "rounded-circle", "btn-transparent", 2, "margin-right", "+35px", 3, "click"], [1, "fa", "fa-question-circle", "fa-lg"], [1, "col-3"], [1, "text-danger", "mb-4"], [1, "col-9"], [3, "formGroup", "ngSubmit"], [1, "row", "mb-5"], [1, "col", "text-start"], [1, "text-danger"], ["type", "text", "name", "nombre", "autocomplete", "off", "formControlName", "nombre", 1, "form-control"], [1, "invalid-feedback"], [4, "ngIf"], [1, "col", "mt-4", "ms-4"], [1, "btn", "btn-info", "bg-gradient", 3, "disabled"], ["datatable", "", "width", "100%", 1, "row-border", "hover", 3, "dtOptions", "dtTrigger"], [1, "table", "bg-light", "bg-gradient"], [1, ""], [1, "align-middle"], [4, "ngFor", "ngForOf"], ["ayudaCategoria", ""], ["scope", "row"], ["ngbTooltip", "Editar", 1, "btn", "btn-outline-info", "btn-sm", "dripicons-document-edit", 3, "click"], ["ngbTooltip", "Eliminar", 1, "btn", "btn-outline-danger", "btn-sm", "dripicons-cross", 3, "click"], [1, "modal-header", "bg"], [1, "modal-title", "text-white"], ["type", "button", "aria-label", "Close", 1, "close", 3, "click"], [1, "modal-body", 2, "text-align", "justify"], [2, "margin-bottom", "20px"], [2, "font-size", "15px"], [1, "modal-footer"], ["type", "button", 1, "btn", "btn-dark", 3, "click"]], template: function ListarCategoriaComponent_Template(rf, ctx) { if (rf & 1) {
         const _r14 = _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵgetCurrentView"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelement"](0, "app-loader");
         _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementStart"](1, "div", 0);
@@ -466,7 +510,7 @@ ListarCategoriaComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_M
         _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵproperty"]("dtOptions", ctx.dtOptions)("dtTrigger", ctx.dtTrigger);
         _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵadvance"](10);
         _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵproperty"]("ngForOf", ctx.categorias);
-    } }, directives: [_shared_ui_loader_loader_component__WEBPACK_IMPORTED_MODULE_5__.LoaderComponent, _shared_ui_pagetitle_pagetitle_component__WEBPACK_IMPORTED_MODULE_6__.PagetitleComponent, _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_10__.NgbTooltip, _angular_forms__WEBPACK_IMPORTED_MODULE_9__["ɵNgNoValidate"], _angular_forms__WEBPACK_IMPORTED_MODULE_9__.NgControlStatusGroup, _angular_forms__WEBPACK_IMPORTED_MODULE_9__.FormGroupDirective, _angular_forms__WEBPACK_IMPORTED_MODULE_9__.DefaultValueAccessor, _angular_forms__WEBPACK_IMPORTED_MODULE_9__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_9__.FormControlName, _angular_common__WEBPACK_IMPORTED_MODULE_11__.NgIf, angular_datatables__WEBPACK_IMPORTED_MODULE_1__.DataTableDirective, _angular_common__WEBPACK_IMPORTED_MODULE_11__.NgForOf], styles: ["@charset \"UTF-8\";\n.btn-icon.rounded-circle[_ngcontent-%COMP%] {\n  width: 30px;\n  \n  height: 30px;\n  padding: 0;\n  \n  line-height: 25px;\n  \n  font-size: 23px;\n  \n}\n.btn-transparent[_ngcontent-%COMP%] {\n  background-color: transparent;\n  \n  border: none;\n  \n  color: #007bff;\n  \n}\n\n.btn-transparent[_ngcontent-%COMP%]:hover {\n  color: #0056b3;\n  \n}\n.closeA[_ngcontent-%COMP%] {\n  position: absolute;\n  \n  top: 25px;\n  \n  left: 750px;\n  \n}\n.modal-headerA[_ngcontent-%COMP%] {\n  background-color: #6e0000;\n  height: 80px;\n}\n.modal-titleA[_ngcontent-%COMP%] {\n  color: #fff;\n  \n  position: absolute;\n  \n  top: 20px;\n  \n  left: 12px;\n}\n.modal-footerA[_ngcontent-%COMP%] {\n  background-color: #6e0000;\n  height: 50px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImxpc3Rhci1jYXRlZ29yaWEuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsZ0JBQWdCO0FBQ2hCO0VBQ0ksV0FBQTtFQUNBLDRDQUFBO0VBQ0EsWUFBQTtFQUNBLFVBQUE7RUFDQSwwREFBQTtFQUNBLGlCQUFBO0VBQ0Esc0NBQUE7RUFDQSxlQUFBO0VBQ0EsK0NBQUE7QUFDSjtBQUVBO0VBQ0ksNkJBQUE7RUFDQSx5Q0FBQTtFQUNBLFlBQUE7RUFDQSxxQ0FBQTtFQUNBLGNBQUE7RUFDQSxxREFBQTtBQUNKO0FBRUEsZ0ZBQUE7QUFDQTtFQUNJLGNBQUE7RUFDQSw0REFBQTtBQUNKO0FBR0E7RUFDSSxrQkFBQTtFQUNBLDBEQUFBO0VBQ0EsU0FBQTtFQUNBLHNDQUFBO0VBQ0EsV0FBQTtFQUNBLGlDQUFBO0FBQUo7QUFJQTtFQUNJLHlCQUFBO0VBQ0EsWUFBQTtBQURKO0FBS0E7RUFDSSxXQUFBO0VBQ0EscUNBQUE7RUFDQSxrQkFBQTtFQUNBLDBEQUFBO0VBQ0EsU0FBQTtFQUNBLHNDQUFBO0VBQ0EsVUFBQTtBQUZKO0FBS0E7RUFDSSx5QkFBQTtFQUNBLFlBQUE7QUFGSiIsImZpbGUiOiJsaXN0YXItY2F0ZWdvcmlhLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiQGNoYXJzZXQgXCJVVEYtOFwiO1xuLmJ0bi1pY29uLnJvdW5kZWQtY2lyY2xlIHtcbiAgd2lkdGg6IDMwcHg7XG4gIC8qIENhbWJpYSBlbCB0YW1hw7FvIHNlZ8O6biB0dXMgcHJlZmVyZW5jaWFzICovXG4gIGhlaWdodDogMzBweDtcbiAgcGFkZGluZzogMDtcbiAgLyogRWxpbWluYSBlbCByZWxsZW5vIHBhcmEgcXVlIHNlYSBjb21wbGV0YW1lbnRlIHJlZG9uZG8gKi9cbiAgbGluZS1oZWlnaHQ6IDI1cHg7XG4gIC8qIEFsaW5lYSBlbCBjb250ZW5pZG8gdmVydGljYWxtZW50ZSAqL1xuICBmb250LXNpemU6IDIzcHg7XG4gIC8qIEFqdXN0YSBlbCB0YW1hw7FvIGRlbCBpY29ubyBzaSBlcyBuZWNlc2FyaW8gKi9cbn1cblxuLmJ0bi10cmFuc3BhcmVudCB7XG4gIGJhY2tncm91bmQtY29sb3I6IHRyYW5zcGFyZW50O1xuICAvKiBFc3RhYmxlY2UgZWwgZm9uZG8gY29tbyB0cmFuc3BhcmVudGUgKi9cbiAgYm9yZGVyOiBub25lO1xuICAvKiBFbGltaW5hIGVsIGJvcmRlIHNpIGVzIG5lY2VzYXJpbyAqL1xuICBjb2xvcjogIzAwN2JmZjtcbiAgLyogQ2FtYmlhIGVsIGNvbG9yIGRlbCB0ZXh0byBzZWfDum4gdHVzIHByZWZlcmVuY2lhcyAqL1xufVxuXG4vKiBQZXJzb25hbGl6YSBlbCBjb2xvciBkZSB0ZXh0byBjdWFuZG8gc2UgcGFzYSBlbCBjdXJzb3IgcG9yIGVuY2ltYSBkZWwgYm90w7NuICovXG4uYnRuLXRyYW5zcGFyZW50OmhvdmVyIHtcbiAgY29sb3I6ICMwMDU2YjM7XG4gIC8qIENhbWJpYSBlbCBjb2xvciBkZWwgdGV4dG8gYWwgcGFzYXIgZWwgY3Vyc29yIHBvciBlbmNpbWEgKi9cbn1cblxuLmNsb3NlQSB7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgLyogRXN0YWJsZWNlciBwb3NpY2nDs24gYWJzb2x1dGEgcGFyYSBwb3NpY2lvbmFyIGVsIGJvdMOzbiAqL1xuICB0b3A6IDI1cHg7XG4gIC8qIERpc3RhbmNpYSBkZXNkZSBsYSBwYXJ0ZSBzdXBlcmlvciAqL1xuICBsZWZ0OiA3NTBweDtcbiAgLyogRGlzdGFuY2lhIGRlc2RlIGxhIGl6cXVpZXJkYSAqL1xufVxuXG4ubW9kYWwtaGVhZGVyQSB7XG4gIGJhY2tncm91bmQtY29sb3I6ICM2ZTAwMDA7XG4gIGhlaWdodDogODBweDtcbn1cblxuLm1vZGFsLXRpdGxlQSB7XG4gIGNvbG9yOiAjZmZmO1xuICAvKiBDb2xvciBkZWwgdGV4dG8gZW4gZWwgZW5jYWJlemFkbyAqL1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIC8qIEVzdGFibGVjZXIgcG9zaWNpw7NuIGFic29sdXRhIHBhcmEgcG9zaWNpb25hciBlbCBib3TDs24gKi9cbiAgdG9wOiAyMHB4O1xuICAvKiBEaXN0YW5jaWEgZGVzZGUgbGEgcGFydGUgc3VwZXJpb3IgKi9cbiAgbGVmdDogMTJweDtcbn1cblxuLm1vZGFsLWZvb3RlckEge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjNmUwMDAwO1xuICBoZWlnaHQ6IDUwcHg7XG59Il19 */"] });
+    } }, directives: [_shared_ui_loader_loader_component__WEBPACK_IMPORTED_MODULE_5__.LoaderComponent, _shared_ui_pagetitle_pagetitle_component__WEBPACK_IMPORTED_MODULE_6__.PagetitleComponent, _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_10__.NgbTooltip, _angular_forms__WEBPACK_IMPORTED_MODULE_9__["ɵNgNoValidate"], _angular_forms__WEBPACK_IMPORTED_MODULE_9__.NgControlStatusGroup, _angular_forms__WEBPACK_IMPORTED_MODULE_9__.FormGroupDirective, _angular_forms__WEBPACK_IMPORTED_MODULE_9__.DefaultValueAccessor, _angular_forms__WEBPACK_IMPORTED_MODULE_9__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_9__.FormControlName, _angular_common__WEBPACK_IMPORTED_MODULE_11__.NgIf, angular_datatables__WEBPACK_IMPORTED_MODULE_1__.DataTableDirective, _angular_common__WEBPACK_IMPORTED_MODULE_11__.NgForOf], styles: ["@charset \"UTF-8\";\n.btn-icon.rounded-circle[_ngcontent-%COMP%] {\n  width: 30px;\n  \n  height: 30px;\n  padding: 0;\n  \n  line-height: 25px;\n  \n  font-size: 23px;\n  \n}\n.btn-transparent[_ngcontent-%COMP%] {\n  background-color: transparent;\n  \n  border: none;\n  \n  color: #007bff;\n  \n}\n\n.btn-transparent[_ngcontent-%COMP%]:hover {\n  color: #0056b3;\n  \n}\n.bg[_ngcontent-%COMP%] {\n  background-color: #6e0000;\n}\n.closeA[_ngcontent-%COMP%] {\n  position: absolute;\n  \n  top: 25px;\n  \n  left: 750px;\n  \n}\n.modal-headerA[_ngcontent-%COMP%] {\n  background-color: #6e0000;\n  height: 80px;\n}\n.modal-titleA[_ngcontent-%COMP%] {\n  color: #fff;\n  \n  position: absolute;\n  \n  top: 20px;\n  \n  left: 12px;\n}\n.modal-footerA[_ngcontent-%COMP%] {\n  background-color: #6e0000;\n  height: 50px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImxpc3Rhci1jYXRlZ29yaWEuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsZ0JBQWdCO0FBQ2hCO0VBQ0ksV0FBQTtFQUNBLDRDQUFBO0VBQ0EsWUFBQTtFQUNBLFVBQUE7RUFDQSwwREFBQTtFQUNBLGlCQUFBO0VBQ0Esc0NBQUE7RUFDQSxlQUFBO0VBQ0EsK0NBQUE7QUFDSjtBQUVBO0VBQ0ksNkJBQUE7RUFDQSx5Q0FBQTtFQUNBLFlBQUE7RUFDQSxxQ0FBQTtFQUNBLGNBQUE7RUFDQSxxREFBQTtBQUNKO0FBRUEsZ0ZBQUE7QUFDQTtFQUNJLGNBQUE7RUFDQSw0REFBQTtBQUNKO0FBRUE7RUFDRSx5QkFBQTtBQUNGO0FBR0E7RUFDSSxrQkFBQTtFQUNBLDBEQUFBO0VBQ0EsU0FBQTtFQUNBLHNDQUFBO0VBQ0EsV0FBQTtFQUNBLGlDQUFBO0FBQUo7QUFJQTtFQUNJLHlCQUFBO0VBQ0EsWUFBQTtBQURKO0FBS0E7RUFDSSxXQUFBO0VBQ0EscUNBQUE7RUFDQSxrQkFBQTtFQUNBLDBEQUFBO0VBQ0EsU0FBQTtFQUNBLHNDQUFBO0VBQ0EsVUFBQTtBQUZKO0FBS0E7RUFDSSx5QkFBQTtFQUNBLFlBQUE7QUFGSiIsImZpbGUiOiJsaXN0YXItY2F0ZWdvcmlhLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiQGNoYXJzZXQgXCJVVEYtOFwiO1xuLmJ0bi1pY29uLnJvdW5kZWQtY2lyY2xlIHtcbiAgd2lkdGg6IDMwcHg7XG4gIC8qIENhbWJpYSBlbCB0YW1hw7FvIHNlZ8O6biB0dXMgcHJlZmVyZW5jaWFzICovXG4gIGhlaWdodDogMzBweDtcbiAgcGFkZGluZzogMDtcbiAgLyogRWxpbWluYSBlbCByZWxsZW5vIHBhcmEgcXVlIHNlYSBjb21wbGV0YW1lbnRlIHJlZG9uZG8gKi9cbiAgbGluZS1oZWlnaHQ6IDI1cHg7XG4gIC8qIEFsaW5lYSBlbCBjb250ZW5pZG8gdmVydGljYWxtZW50ZSAqL1xuICBmb250LXNpemU6IDIzcHg7XG4gIC8qIEFqdXN0YSBlbCB0YW1hw7FvIGRlbCBpY29ubyBzaSBlcyBuZWNlc2FyaW8gKi9cbn1cblxuLmJ0bi10cmFuc3BhcmVudCB7XG4gIGJhY2tncm91bmQtY29sb3I6IHRyYW5zcGFyZW50O1xuICAvKiBFc3RhYmxlY2UgZWwgZm9uZG8gY29tbyB0cmFuc3BhcmVudGUgKi9cbiAgYm9yZGVyOiBub25lO1xuICAvKiBFbGltaW5hIGVsIGJvcmRlIHNpIGVzIG5lY2VzYXJpbyAqL1xuICBjb2xvcjogIzAwN2JmZjtcbiAgLyogQ2FtYmlhIGVsIGNvbG9yIGRlbCB0ZXh0byBzZWfDum4gdHVzIHByZWZlcmVuY2lhcyAqL1xufVxuXG4vKiBQZXJzb25hbGl6YSBlbCBjb2xvciBkZSB0ZXh0byBjdWFuZG8gc2UgcGFzYSBlbCBjdXJzb3IgcG9yIGVuY2ltYSBkZWwgYm90w7NuICovXG4uYnRuLXRyYW5zcGFyZW50OmhvdmVyIHtcbiAgY29sb3I6ICMwMDU2YjM7XG4gIC8qIENhbWJpYSBlbCBjb2xvciBkZWwgdGV4dG8gYWwgcGFzYXIgZWwgY3Vyc29yIHBvciBlbmNpbWEgKi9cbn1cblxuLmJnIHtcbiAgYmFja2dyb3VuZC1jb2xvcjogIzZlMDAwMDtcbn1cblxuLmNsb3NlQSB7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgLyogRXN0YWJsZWNlciBwb3NpY2nDs24gYWJzb2x1dGEgcGFyYSBwb3NpY2lvbmFyIGVsIGJvdMOzbiAqL1xuICB0b3A6IDI1cHg7XG4gIC8qIERpc3RhbmNpYSBkZXNkZSBsYSBwYXJ0ZSBzdXBlcmlvciAqL1xuICBsZWZ0OiA3NTBweDtcbiAgLyogRGlzdGFuY2lhIGRlc2RlIGxhIGl6cXVpZXJkYSAqL1xufVxuXG4ubW9kYWwtaGVhZGVyQSB7XG4gIGJhY2tncm91bmQtY29sb3I6ICM2ZTAwMDA7XG4gIGhlaWdodDogODBweDtcbn1cblxuLm1vZGFsLXRpdGxlQSB7XG4gIGNvbG9yOiAjZmZmO1xuICAvKiBDb2xvciBkZWwgdGV4dG8gZW4gZWwgZW5jYWJlemFkbyAqL1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIC8qIEVzdGFibGVjZXIgcG9zaWNpw7NuIGFic29sdXRhIHBhcmEgcG9zaWNpb25hciBlbCBib3TDs24gKi9cbiAgdG9wOiAyMHB4O1xuICAvKiBEaXN0YW5jaWEgZGVzZGUgbGEgcGFydGUgc3VwZXJpb3IgKi9cbiAgbGVmdDogMTJweDtcbn1cblxuLm1vZGFsLWZvb3RlckEge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjNmUwMDAwO1xuICBoZWlnaHQ6IDUwcHg7XG59Il19 */"] });
 
 
 /***/ }),

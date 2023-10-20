@@ -165,20 +165,40 @@ class EditarPasswordComponent {
                 if ((/[A-Z]/.test(confirm)) == true && (/\d/.test(confirm)) == true) {
                     this.usuario.password = confirm;
                     this.usuarioService.editarContraseña(this.usuario).subscribe(resp => {
-                        sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire('Éxito', 'Modificado correctamente', 'success');
+                        sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
+                            confirmButtonColor: "#a90000",
+                            title: 'Éxito',
+                            text: `Modificado correctamente`,
+                            icon: 'success',
+                        });
                         this.router.navigateByUrl('/perfil/datos');
                     });
                 }
                 else {
-                    sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire('Advertencia', 'La contraseña debe contener al menos una mayúscula y un número', 'warning');
+                    sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
+                        confirmButtonColor: "#a90000",
+                        title: 'Advertencia',
+                        text: 'La contraseña debe contener al menos una mayúscula y un número',
+                        icon: 'warning',
+                    });
                 }
             }
             else {
-                sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire('Advertencia', 'Las contraseñas no coinciden', 'warning');
+                sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
+                    confirmButtonColor: "#a90000",
+                    title: 'Advertencia',
+                    text: 'Las contraseñas no coinciden',
+                    icon: 'warning',
+                });
             }
         }, err => {
             if (err.status == 400) {
-                sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire('Contraseña inválida', 'Por favor, ingrese su contraseña', 'warning');
+                sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
+                    confirmButtonColor: "#a90000",
+                    title: 'Contraseña inválida',
+                    text: 'Por favor, ingrese su contraseña',
+                    icon: 'warning',
+                });
             }
         });
     }
@@ -837,18 +857,33 @@ class ValidarComponent {
             if (this.useredit) {
                 this.usuario.nombreusuario = this.useredit;
                 this.usuarioService.editar(this.usuario).subscribe(resp => {
-                    sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire('Éxito', 'Modificado correctamente', 'success').then(() => {
+                    sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
+                        confirmButtonColor: "#a90000",
+                        title: 'Éxito',
+                        text: `Modificado correctamente`,
+                        icon: 'success',
+                    }).then(() => {
                         //this.router.navigate(['/perfil/datos']);
-                        window.location.replace('/');
+                        window.location.replace('/perfil/datos');
                     });
                 });
             }
             else {
-                sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire('Error', 'Algo ocurrió', 'error');
+                sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
+                    confirmButtonColor: "#a90000",
+                    title: 'Error',
+                    text: 'Algo ocurrió',
+                    icon: 'error',
+                });
             }
         }, err => {
             if (err.status == 400) {
-                sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire('Contraseña inválida', 'Por favor, ingrese su contraseña', 'warning');
+                sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
+                    confirmButtonColor: "#a90000",
+                    title: 'Contraseña inválida',
+                    text: 'Por favor, ingrese su contraseña',
+                    icon: 'warning',
+                });
             }
         });
     }

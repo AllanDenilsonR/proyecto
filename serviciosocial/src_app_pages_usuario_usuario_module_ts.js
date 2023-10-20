@@ -639,16 +639,24 @@ class ListarUsuarioComponent {
             text: `Esto se puede revertir`,
             icon: 'question',
             showCancelButton: true,
+            confirmButtonColor: "#a90000",
+            cancelButtonColor: '#343a40',
             confirmButtonText: 'Sí, cambiar',
             cancelButtonText: 'Cancelar'
         }).then((result) => {
             if (result.isConfirmed) {
                 this.usuarioService.estado(seleccion).subscribe(resp => {
-                    sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire('Modificado', 'El estado ha sido modificado', 'success');
+                    sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
+                        confirmButtonColor: "#a90000",
+                        title: 'Éxito',
+                        text: 'El estado ha sido modificado',
+                        icon: 'success',
+                    });
                     this.reload();
                     this.cargarDatos();
                 }, (err) => {
                     sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
+                        confirmButtonColor: "#a90000",
                         icon: 'error',
                         title: 'Error',
                         text: err.error.msg
@@ -656,7 +664,12 @@ class ListarUsuarioComponent {
                 });
             }
             else if (result.isDenied) {
-                sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire('Cambios no aplicados', '', 'info');
+                sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
+                    confirmButtonColor: "#a90000",
+                    title: "Información",
+                    text: `Cambios no aplicados`,
+                    icon: "info",
+                });
             }
         });
     }
@@ -687,7 +700,7 @@ class ListarUsuarioComponent {
             this.usuarioSeleccionado = null;
             this.butttonText = "Guardar";
             this.formulario.reset();
-            this.modalService.open(content);
+            this.modalService.open(content, { backdrop: 'static', keyboard: false });
         }
         else {
             this.llenarEstudiantes();
@@ -705,7 +718,7 @@ class ListarUsuarioComponent {
                 this.formulario.get("estudiante").disable();
                 this.formulario.get("administradoru").setValue(this.usuarioSeleccionado.administradoru.id);
             }
-            this.modalService.open(content);
+            this.modalService.open(content, { backdrop: 'static', keyboard: false });
         }
     }
     accion() {
@@ -741,11 +754,21 @@ class ListarUsuarioComponent {
             let errorMessage = 'Ocurrió un error en la solicitud'; // Mensaje de error genérico
             if (error.error && error.error.error) {
                 errorMessage = error.error.error;
-                sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire('Error', errorMessage, 'error');
+                sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
+                    confirmButtonColor: "#a90000",
+                    icon: 'error',
+                    title: 'Error',
+                    text: errorMessage
+                });
             }
             return (0,rxjs__WEBPACK_IMPORTED_MODULE_13__.throwError)(errorMessage);
         })).subscribe((resp) => {
-            sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire('Éxito', 'Almacenado correctamente', 'success');
+            sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
+                confirmButtonColor: "#a90000",
+                title: 'Éxito',
+                text: `Almacenado correctamente`,
+                icon: 'success',
+            });
             this.modalService.dismissAll();
             this.usuarioSeleccionado = null;
             this.reset();
@@ -786,7 +809,12 @@ class ListarUsuarioComponent {
             }
         }
         this.usuarioService.editar(this.usuarioSeleccionado).subscribe(resp => {
-            sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire('Éxito', 'Modificado correctamente', 'success');
+            sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
+                confirmButtonColor: "#a90000",
+                title: 'Éxito',
+                text: `Modificado correctamente`,
+                icon: 'success',
+            });
             this.modalService.dismissAll();
             this.usuarioSeleccionado = null;
             this.reset();
@@ -794,6 +822,7 @@ class ListarUsuarioComponent {
             this.cargarDatos();
         }, (err) => {
             sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
+                confirmButtonColor: "#a90000",
                 title: 'Error',
                 text: `Algo fallo`,
                 icon: 'error',

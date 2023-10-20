@@ -893,8 +893,8 @@ class ListaAdminComponent {
             }
         }
         else {
-            console.log("campos vacios");
             sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
+                confirmButtonColor: "#a90000",
                 position: 'center',
                 title: 'Faltan datos en el formulario',
                 text: 'completar campos requeridos',
@@ -914,14 +914,24 @@ class ListaAdminComponent {
         else {
             this.adminService.nuevoAdmin(admin).subscribe((resp) => {
                 if (resp) {
-                    sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire('Éxito', 'Almacenado correctamente', 'success');
+                    sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
+                        confirmButtonColor: "#a90000",
+                        title: 'Éxito',
+                        text: `Almacenado correctamente`,
+                        icon: 'success',
+                    });
                     this.formAdmin.reset();
                     this.formAdmin.get('cargo').setValue('Seleccione');
                     this.reload();
                 }
             }, (err) => {
                 //consoleerro
-                sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire('Ocurrio un problema', '', 'warning');
+                sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
+                    confirmButtonColor: "#a90000",
+                    title: 'Advertencia',
+                    text: `Ocurrio un problema`,
+                    icon: 'warning',
+                });
             });
         }
     }
@@ -933,7 +943,12 @@ class ListaAdminComponent {
         else {
             this.adminService.editarAdmin(admine).subscribe((resp) => {
                 if (resp) {
-                    sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire('Éxito', 'Modificado correctamente', 'success');
+                    sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
+                        confirmButtonColor: "#a90000",
+                        title: 'Éxito',
+                        text: `Modificado correctamente`,
+                        icon: 'success',
+                    });
                     this.formAdmin.reset();
                     this.formAdmin.get('cargo').setValue('Seleccione');
                     this.reload();
@@ -941,7 +956,12 @@ class ListaAdminComponent {
                 }
             }, (err) => {
                 if (err.status === 422) {
-                    sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire('Advertencia', 'Teléfono ya registrado', 'warning');
+                    sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
+                        confirmButtonColor: "#a90000",
+                        title: "Advertencia",
+                        text: `Teléfono ya registrado`,
+                        icon: "warning",
+                    });
                 }
             });
         }
@@ -952,19 +972,36 @@ class ListaAdminComponent {
             text: `Esto no se puede revertir`,
             icon: 'question',
             showCancelButton: true,
+            confirmButtonColor: "#a90000",
+            cancelButtonColor: '#343a40',
             confirmButtonText: 'Si, borrar',
             cancelButtonText: 'Cancelar'
         }).then((result) => {
             if (result.isConfirmed) {
                 this.adminService.deleteAdmin(x).subscribe((res) => {
-                    sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire('Eliminado', 'El registro ha sido eliminado', 'success');
+                    sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
+                        confirmButtonColor: "#a90000",
+                        title: 'Eliminado',
+                        text: `El registro ha sido eliminado`,
+                        icon: 'success',
+                    });
                     this.reload();
                 }, (err) => {
-                    sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire('Error', 'El registro no puede ser eliminado', 'warning');
+                    sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
+                        confirmButtonColor: "#a90000",
+                        title: 'Error',
+                        text: 'El registro no puede ser eliminado',
+                        icon: 'warning',
+                    });
                 });
             }
             else if (result.isDenied) {
-                sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire('Cambios no aplicados', '', 'info');
+                sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
+                    confirmButtonColor: "#a90000",
+                    title: "Información",
+                    text: `Cambios no aplicados`,
+                    icon: "info",
+                });
             }
         });
     }
@@ -976,7 +1013,6 @@ class ListaAdminComponent {
             this.registrandoCargo();
         }
         else {
-            console.log("campos vacios");
             sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
                 position: 'center',
                 title: 'Faltan datos en el formulario',
@@ -989,13 +1025,23 @@ class ListaAdminComponent {
         const cargoAdmin = this.formAdminCargo.value;
         this.cargoService.nuevoCargoAdmin(cargoAdmin).subscribe((resp) => {
             if (resp) {
-                sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire('Éxito', 'Almacenado correctamente', 'success');
+                sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
+                    confirmButtonColor: "#a90000",
+                    title: 'Éxito',
+                    text: `Almacenado correctamente`,
+                    icon: 'success',
+                });
                 this.formAdminCargo.reset();
                 this.llenarComboCargos();
             }
         }, (err) => {
             //consoleerro
-            sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire('Ocurrio un problema', '', 'warning');
+            sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
+                confirmButtonColor: "#a90000",
+                title: 'Advertencia',
+                text: `Ocurrio un problema`,
+                icon: 'warning',
+            });
         });
     }
     iniciarFormularioCargoAdmin() {

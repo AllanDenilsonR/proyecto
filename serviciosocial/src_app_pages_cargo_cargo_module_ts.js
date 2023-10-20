@@ -318,6 +318,7 @@ class ListaCargosComponent {
         }
         else {
             sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
+                confirmButtonColor: "#a90000",
                 position: "center",
                 title: "Faltan datos en el formulario",
                 text: "completar campos requeridos",
@@ -330,18 +331,33 @@ class ListaCargosComponent {
         const cargovalid = this.formCargo.get('nombrecargo').value;
         const v = this.existe(cargovalid);
         if (v) {
-            sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire('Error', 'Ya existe el cargo', 'warning');
+            sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
+                confirmButtonColor: "#a90000",
+                title: 'Error',
+                text: 'Ya existe el cargo',
+                icon: 'warning',
+            });
         }
         else {
             this.cargoService.nuevoCargo(cargo).subscribe((resp) => {
                 if (resp) {
-                    sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire("Éxito", "Almacenado correctamente", "success");
+                    sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
+                        confirmButtonColor: "#a90000",
+                        title: 'Éxito',
+                        text: `Almacenado correctamente`,
+                        icon: 'success',
+                    });
                     this.formCargo.reset();
                     this.reload();
                 }
             }, (err) => {
                 //consoleerro
-                sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire("Ocurrio un problema", "", "warning");
+                sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
+                    confirmButtonColor: "#a90000",
+                    title: 'Advertencia',
+                    text: `Ocurrio un problema`,
+                    icon: 'warning',
+                });
             });
         }
     }
@@ -349,13 +365,23 @@ class ListaCargosComponent {
         const cargoe = this.formCargo.value;
         this.cargoService.editarCargo(cargoe).subscribe((resp) => {
             if (resp) {
-                sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire("Éxito", "Modificado correctamente", "success");
+                sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
+                    confirmButtonColor: "#a90000",
+                    title: 'Éxito',
+                    text: `Modificado correctamente`,
+                    icon: 'success',
+                });
                 this.formCargo.reset();
                 this.reload();
             }
         }, (err) => {
             //consoleerro
-            sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire("Ocurrio un problema", "", "warning");
+            sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
+                confirmButtonColor: "#a90000",
+                title: 'Advertencia',
+                text: `Ocurrio un problema`,
+                icon: 'warning',
+            });
         });
     }
     eliminandoconAlert(x) {
@@ -364,23 +390,40 @@ class ListaCargosComponent {
             text: `Esto no se puede revertir`,
             icon: 'question',
             showCancelButton: true,
+            confirmButtonColor: "#a90000",
+            cancelButtonColor: '#343a40',
             confirmButtonText: 'Sí, borrar',
             cancelButtonText: 'Cancelar'
         }).then((result) => {
             if (result.isConfirmed) {
                 const v = this.verificar(x.id);
                 if (v) {
-                    sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire('Error', 'El registro no puede ser eliminado', 'warning');
+                    sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
+                        confirmButtonColor: "#a90000",
+                        title: 'Error',
+                        text: 'El registro no puede ser eliminado',
+                        icon: 'warning',
+                    });
                 }
                 else {
                     this.cargoService.deleteCargo(x).subscribe(response => {
-                        sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire('Eliminado', 'El registro ha sido eliminado', 'success');
+                        sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
+                            confirmButtonColor: "#a90000",
+                            title: 'Eliminado',
+                            text: `El registro ha sido eliminado`,
+                            icon: 'success',
+                        });
                         this.reload();
                     });
                 }
             }
             else if (result.isDenied) {
-                sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire('Cambios no aplicados', '', 'info');
+                sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
+                    confirmButtonColor: "#a90000",
+                    title: "Información",
+                    text: `Cambios no aplicados`,
+                    icon: "info",
+                });
             }
         });
     }
