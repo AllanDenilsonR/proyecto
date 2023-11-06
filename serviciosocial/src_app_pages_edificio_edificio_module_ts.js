@@ -423,9 +423,9 @@ class ListarEdificioComponent {
                 }, (err) => {
                     sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
                         confirmButtonColor: "#a90000",
-                        icon: 'error',
-                        title: 'Error',
-                        text: err.error.msg
+                        title: 'Advertencia',
+                        text: "No puede ser eliminado",
+                        icon: 'warning',
                     });
                 });
             }
@@ -488,7 +488,7 @@ class ListarEdificioComponent {
                     sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
                         confirmButtonColor: "#a90000",
                         title: 'Advertencia',
-                        text: `Ocurrio un problema`,
+                        text: `Ocurrió un problema`,
                         icon: 'warning',
                     });
                 }
@@ -500,26 +500,44 @@ class ListarEdificioComponent {
     editar() {
         this.edificioSeleccionado.edificio = this.formulario.controls['edificio'].value;
         this.edificioSeleccionado.niveles = this.formulario.controls['niveles'].value;
-        this.edificioServicio.editar(this.edificioSeleccionado).subscribe(resp => {
-            sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
-                confirmButtonColor: "#a90000",
-                title: 'Éxito',
-                text: `Modificado correctamente`,
-                icon: 'success',
-            });
-            this.modalService.dismissAll();
-            this.edificioSeleccionado = null;
-            this.reset();
-            this.reload();
-        }, (err) => {
+        this.edificioServicio.editar(this.edificioSeleccionado).subscribe((resp) => {
+            if (resp.mensaje === "Error edificio existente") {
+                sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
+                    confirmButtonColor: "#a90000",
+                    title: "Advertencia",
+                    text: 'Registro existente',
+                    icon: "warning",
+                });
+            }
+            else {
+                if (resp) {
+                    sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
+                        confirmButtonColor: "#a90000",
+                        title: 'Éxito',
+                        text: ` Modificado correctamente`,
+                        icon: 'success',
+                    });
+                    this.reload();
+                    this.modalService.dismissAll();
+                    this.formulario.reset();
+                }
+                else {
+                    sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
+                        confirmButtonColor: "#a90000",
+                        title: 'Advertencia',
+                        text: `Ocurrió un problema`,
+                        icon: 'warning',
+                    });
+                }
+            }
+        }), (err) => {
             sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
                 confirmButtonColor: "#a90000",
                 title: 'Error',
                 text: `Algo fallo`,
                 icon: 'error',
             });
-            this.reload();
-        });
+        };
     }
     esCampoValido(campo) {
         const validarCampo = this.formulario.get(campo);

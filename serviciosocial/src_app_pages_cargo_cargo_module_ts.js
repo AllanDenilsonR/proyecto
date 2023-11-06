@@ -333,7 +333,7 @@ class ListaCargosComponent {
         if (v) {
             sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
                 confirmButtonColor: "#a90000",
-                title: 'Error',
+                title: 'Advertencia',
                 text: 'Ya existe el cargo',
                 icon: 'warning',
             });
@@ -363,26 +363,53 @@ class ListaCargosComponent {
     }
     editandoCargo() {
         const cargoe = this.formCargo.value;
-        this.cargoService.editarCargo(cargoe).subscribe((resp) => {
-            if (resp) {
-                sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
-                    confirmButtonColor: "#a90000",
-                    title: 'Éxito',
-                    text: `Modificado correctamente`,
-                    icon: 'success',
-                });
-                this.formCargo.reset();
-                this.reload();
-            }
-        }, (err) => {
-            //consoleerro
+        if (cargoe.nombrecargo === this.cargoe.nombrecargo) {
             sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
                 confirmButtonColor: "#a90000",
-                title: 'Advertencia',
-                text: `Ocurrio un problema`,
-                icon: 'warning',
+                title: 'Éxito',
+                text: 'No se realizaron.',
+                icon: 'success',
             });
-        });
+            this.formCargo.reset();
+            this.cargoe = null;
+        }
+        else {
+            if (this.existe(cargoe.nombrecargo)) {
+                sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
+                    confirmButtonColor: "#a90000",
+                    title: 'Advertencia',
+                    text: `Ya existe el cargo`,
+                    icon: 'warning',
+                });
+                this.formCargo.reset();
+                this.cargoe = null;
+            }
+            else {
+                this.cargoService.editarCargo(cargoe).subscribe((resp) => {
+                    if (resp) {
+                        sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
+                            confirmButtonColor: "#a90000",
+                            title: 'Éxito',
+                            text: `Modificado correctamente`,
+                            icon: 'success',
+                        });
+                        this.formCargo.reset();
+                        this.reload();
+                    }
+                }, (err) => {
+                    //consoleerro
+                    this.reload();
+                    sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
+                        confirmButtonColor: "#a90000",
+                        title: 'Error',
+                        text: `Ocurrio un problema`,
+                        icon: 'error',
+                    });
+                });
+                this.formCargo.reset();
+                // this.cargoe=null;
+            }
+        }
     }
     eliminandoconAlert(x) {
         sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
@@ -430,8 +457,15 @@ class ListaCargosComponent {
     verificar(id) {
         return this.administradores.some(admin => admin.cargo.id === id);
     }
+    // existe(nombre:string):boolean{
+    //   return this.cargos.some(cargo=>cargo.nombrecargo===nombre);
+    // }
     existe(nombre) {
-        return this.cargos.some(cargo => cargo.nombrecargo === nombre);
+        const normalizedNombre = nombre.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        return this.cargos.some(data => {
+            const normalizedCargo = data.nombrecargo.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            return normalizedCargo.toLocaleLowerCase() === normalizedNombre.toLocaleLowerCase();
+        });
     }
     mostrarRecargando() {
         //recarga los datos

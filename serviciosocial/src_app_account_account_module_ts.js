@@ -265,56 +265,61 @@ class LoginComponent {
         this.router = router;
         this.resetService = resetService;
         this.submitted = false;
-        this.error = '';
-        this.psstype = 'password';
-        this.eye = 'mdi mdi-eye-off';
+        this.error = "";
+        this.psstype = "password";
+        this.eye = "mdi mdi-eye-off";
         this.cred = {
-            correo: '',
-            password: ''
+            correo: "",
+            password: "",
         };
         this.loginForm = this.inif();
     }
     ngOnInit() {
+        // this.usuario = (await this.authService.buscar())
         this.usuario = this.authService.getUserFromLocalCache();
         if (this.authService.isUserLoggedIn()) {
             if (this.authService.hasRole(src_app_enum_role_enum__WEBPACK_IMPORTED_MODULE_0__.Role.ROLE_ESTUDIANTE)) {
-                this.router.navigateByUrl('/default');
+                this.router.navigateByUrl("/default");
             }
-            this.router.navigateByUrl('/dash');
+            this.router.navigateByUrl("/dash");
         }
         else {
-            this.router.navigateByUrl('/account/login');
+            this.router.navigateByUrl("/account/login");
         }
     }
     inif() {
         return this.formBuilder.group({
-            correo: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_4__.Validators.required, _angular_forms__WEBPACK_IMPORTED_MODULE_4__.Validators.email]],
-            password: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_4__.Validators.required]],
+            correo: ["", [_angular_forms__WEBPACK_IMPORTED_MODULE_4__.Validators.required, _angular_forms__WEBPACK_IMPORTED_MODULE_4__.Validators.email]],
+            password: ["", [_angular_forms__WEBPACK_IMPORTED_MODULE_4__.Validators.required]],
         });
     }
     // convenience getter for easy access to form fields
-    get f() { return this.loginForm.controls; }
+    get f() {
+        return this.loginForm.controls;
+    }
     login() {
         this.cred = this.loginForm.value;
         this.showLoading = true;
-        if (this.cred.correo == '' || this.cred.password == '') {
-            this.error = 'Correo o contraseña vacios';
+        if (this.cred.correo == "" || this.cred.password == "") {
+            this.error = "Correo o contraseña vacios";
         }
         else {
             this.authService.login(this.cred).subscribe((response) => {
                 this.showLoading = false;
-            }, err => {
+            }, (err) => {
                 if (err.status == 406) {
-                    this.error = 'Usuario inactivo, si es un error contacte con el administrador';
+                    this.error =
+                        "Usuario inactivo, si es un error contacte con el administrador";
                     this.showLoading = false;
                 }
                 if (err.status == 400) {
-                    this.error = 'Lo sentimos, las credenciales que estas usando no son validas';
+                    this.error =
+                        "Lo sentimos, las credenciales que estas usando no son validas";
                     this.showLoading = false;
                 }
                 if (err.status == 302) {
                     this.resetService.setCorreo(this.cred.correo);
-                    this.router.navigate(['/account/reset']);
+                    this.router.navigate(["/account/reset"]);
                     this.showLoading = false;
                 }
             });
@@ -322,8 +327,11 @@ class LoginComponent {
     }
     /**PARA ALTERNAR EL BOTON DE PASSWORD */
     cambiar() {
-        this.psstype = this.psstype === 'text' ? 'password' : 'text';
-        this.eye = this.eye === 'mdi mdi-eye-outline' ? 'mdi mdi-eye-off' : 'mdi mdi-eye-outline';
+        this.psstype = this.psstype === "text" ? "password" : "text";
+        this.eye =
+            this.eye === "mdi mdi-eye-outline"
+                ? "mdi mdi-eye-off"
+                : "mdi mdi-eye-outline";
     }
 }
 LoginComponent.ɵfac = function LoginComponent_Factory(t) { return new (t || LoginComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdirectiveInject"](_service_autenticacion_service__WEBPACK_IMPORTED_MODULE_1__.AutenticacionService), _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdirectiveInject"](_angular_forms__WEBPACK_IMPORTED_MODULE_4__.FormBuilder), _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_5__.ActivatedRoute), _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_5__.Router), _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdirectiveInject"](_reset_service_reser_service_service__WEBPACK_IMPORTED_MODULE_2__.ReserServiceService)); };
@@ -632,7 +640,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function ResetComponent_ngb_alert_13_Template(rf, ctx) { if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](0, "ngb-alert", 24);
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](0, "ngb-alert", 23);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
 } if (rf & 2) {
@@ -642,7 +650,7 @@ function ResetComponent_ngb_alert_13_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtextInterpolate"](ctx_r0.error);
 } }
 function ResetComponent_ngb_alert_14_Template(rf, ctx) { if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](0, "ngb-alert", 25);
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](0, "ngb-alert", 24);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
 } if (rf & 2) {
@@ -657,8 +665,8 @@ function ResetComponent_div_22_span_1_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
 } }
 function ResetComponent_div_22_Template(rf, ctx) { if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](0, "div", 26);
-    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtemplate"](1, ResetComponent_div_22_span_1_Template, 2, 0, "span", 27);
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](0, "div", 25);
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtemplate"](1, ResetComponent_div_22_span_1_Template, 2, 0, "span", 26);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
 } if (rf & 2) {
     const ctx_r2 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"]();
@@ -671,8 +679,8 @@ function ResetComponent_div_30_span_1_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
 } }
 function ResetComponent_div_30_Template(rf, ctx) { if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](0, "div", 26);
-    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtemplate"](1, ResetComponent_div_30_span_1_Template, 2, 0, "span", 27);
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](0, "div", 25);
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtemplate"](1, ResetComponent_div_30_span_1_Template, 2, 0, "span", 26);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
 } if (rf & 2) {
     const ctx_r3 = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnextContext"]();
@@ -680,9 +688,9 @@ function ResetComponent_div_30_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵproperty"]("ngIf", ctx_r3.f.confirmpassword.errors.required);
 } }
 function ResetComponent_div_34_Template(rf, ctx) { if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](0, "div", 28);
-    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](1, "div", 29);
-    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](2, "span", 30);
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](0, "div", 27);
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](1, "div", 28);
+    _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](2, "span", 29);
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](3, "Loading...");
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
@@ -706,7 +714,7 @@ class ResetComponent {
             password: ''
         };
         this.formulario = this.init();
-        window.addEventListener('beforeunload', this.onBeforeUnload.bind(this));
+        // window.addEventListener('beforeunload', this.onBeforeUnload.bind(this));
     }
     ngOnInit() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
@@ -715,7 +723,12 @@ class ResetComponent {
                 this.usuario = yield this.usuarioService.obtenerUsuarioCorreo(this.correo).toPromise();
             }
             catch (error) {
-                console.error('Error al obtener el usuario: ', error);
+                sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
+                    confirmButtonColor: "#a90000",
+                    title: 'Advertencia',
+                    text: `Ocurrió un problema`,
+                    icon: 'warning',
+                });
             }
         });
     }
@@ -786,17 +799,9 @@ class ResetComponent {
         this.psstype = this.psstype === 'text' ? 'password' : 'text';
         this.eye = this.eye === 'mdi mdi-eye-outline' ? 'mdi mdi-eye-off' : 'mdi mdi-eye-outline';
     }
-    onBeforeUnload(event) {
-        event.preventDefault();
-        event.returnValue = '¿Estás seguro de que quieres abandonar esta página? Los cambios no guardados se perderán. Podría ocasionar un error.';
-    }
-    ngOnDestroy() {
-        // Asegúrate de eliminar el evento cuando el componente se destruye
-        window.removeEventListener('beforeunload', this.onBeforeUnload.bind(this));
-    }
 }
 ResetComponent.ɵfac = function ResetComponent_Factory(t) { return new (t || ResetComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdirectiveInject"](_angular_forms__WEBPACK_IMPORTED_MODULE_6__.FormBuilder), _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdirectiveInject"](src_app_pages_usuario_service_service_usuario_service__WEBPACK_IMPORTED_MODULE_1__.ServiceUsuarioService), _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdirectiveInject"](_service_reser_service_service__WEBPACK_IMPORTED_MODULE_2__.ReserServiceService), _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdirectiveInject"](_login_service_autenticacion_service__WEBPACK_IMPORTED_MODULE_3__.AutenticacionService)); };
-ResetComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdefineComponent"]({ type: ResetComponent, selectors: [["app-reset"]], decls: 39, vars: 20, consts: [[1, "account-pages", "my-5", "pt-sm-5"], [1, "container"], [1, "row", "justify-content-center"], [1, "col-md-8", "col-lg-6", "col-xl-5"], [1, "card", "overflow-hidden", "log"], [1, "col-7", "text-center", "mt-3"], ["src", "assets/images/minerva2.png", "alt", "", "width", "150", 1, "img-fluid"], [1, "mt-4", "txtbl"], [1, "card-body", "pt-0"], [1, "p-2"], [3, "formGroup", "ngSubmit"], ["type", "danger", 3, "dismissible", 4, "ngIf"], ["type", "success", 3, "dismissible", 4, "ngIf"], [1, "mb-3"], ["for", "password"], [1, "input-group", "auth-pass-inputgroup"], ["formControlName", "password", "placeholder", "Ingrese su nueva contrase\u00F1a", "aria-label", "Password", "aria-describedby", "password-addon", 1, "form-control", "bg-light", 3, "type", "ngClass"], ["type", "button", "id", "password-addon", 1, "btn", "btn-light", "ms-0", 3, "click"], ["class", "invalid-feedback", 4, "ngIf"], ["formControlName", "confirmpassword", "placeholder", "Ingrese nuevamente su contrase\u00F1a", "aria-label", "Password", "aria-describedby", "password-addon", 1, "form-control", "bg-light", 3, "type", "ngClass"], [1, "mt-5", "text-center"], [1, "btn", "btn-dark"], ["class", "spinner-overlay", 4, "ngIf"], [1, "mt-3", "text-center"], ["type", "danger", 3, "dismissible"], ["type", "success", 3, "dismissible"], [1, "invalid-feedback"], [4, "ngIf"], [1, "spinner-overlay"], ["role", "status", 1, "spinner-border", "text-primary", "m-1"], [1, "sr-only"]], template: function ResetComponent_Template(rf, ctx) { if (rf & 1) {
+ResetComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdefineComponent"]({ type: ResetComponent, selectors: [["app-reset"]], decls: 35, vars: 20, consts: [[1, "account-pages", "my-5", "pt-sm-5"], [1, "container"], [1, "row", "justify-content-center"], [1, "col-md-8", "col-lg-6", "col-xl-5"], [1, "card", "overflow-hidden", "log"], [1, "col-7", "text-center", "mt-3"], ["src", "assets/images/minerva2.png", "alt", "", "width", "150", 1, "img-fluid"], [1, "mt-4", "txtbl"], [1, "card-body", "pt-0"], [1, "p-2"], [3, "formGroup", "ngSubmit"], ["type", "danger", 3, "dismissible", 4, "ngIf"], ["type", "success", 3, "dismissible", 4, "ngIf"], [1, "mb-3"], ["for", "password"], [1, "input-group", "auth-pass-inputgroup"], ["formControlName", "password", "placeholder", "Ingrese su nueva contrase\u00F1a", "aria-label", "Password", "aria-describedby", "password-addon", 1, "form-control", "bg-light", 3, "type", "ngClass"], ["type", "button", "id", "password-addon", 1, "btn", "btn-light", "ms-0", 3, "click"], ["class", "invalid-feedback", 4, "ngIf"], ["formControlName", "confirmpassword", "placeholder", "Ingrese nuevamente su contrase\u00F1a", "aria-label", "Password", "aria-describedby", "password-addon", 1, "form-control", "bg-light", 3, "type", "ngClass"], [1, "mt-5", "text-center"], [1, "btn", "btn-dark"], ["class", "spinner-overlay", 4, "ngIf"], ["type", "danger", 3, "dismissible"], ["type", "success", 3, "dismissible"], [1, "invalid-feedback"], [4, "ngIf"], [1, "spinner-overlay"], ["role", "status", 1, "spinner-border", "text-primary", "m-1"], [1, "sr-only"]], template: function ResetComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](1, "div", 1);
         _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](2, "div", 2);
@@ -849,13 +854,6 @@ ResetComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_4__[
         _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtemplate"](34, ResetComponent_div_34_Template, 4, 0, "div", 22);
-        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](35, "div", 23);
-        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](36, "p");
-        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](37, "small");
-        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](38, "No recargar esta p\u00E1gina");
-        _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();

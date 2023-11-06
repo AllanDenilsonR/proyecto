@@ -301,9 +301,9 @@ class CarreraComponent {
         if (this.existe(this.carrera.nombrecarrera)) {
             sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
                 confirmButtonColor: "#a90000",
-                icon: "error",
-                title: "Error",
-                text: "Seleccione una opción",
+                icon: "warning",
+                title: "Advertencia",
+                text: "Ya existe la carrera",
             });
             this.formulario.reset();
             this.carrera = null;
@@ -340,25 +340,51 @@ class CarreraComponent {
         this.carrera = x;
     }
     editar() {
-        this.carrera.nombrecarrera = this.formulario.controls['nombrecarrera'].value;
-        this.carreraService.editar(this.carrera).subscribe(resp => {
+        const nuevoNombre = this.formulario.controls['nombrecarrera'].value;
+        if (nuevoNombre === this.carrera.nombrecarrera) {
             sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
                 confirmButtonColor: "#a90000",
                 title: 'Éxito',
-                text: 'Modificado correctamente',
+                text: 'No se realizaron cambios.',
                 icon: 'success',
             });
-            this.formulario.get('nombrecarrera').setValue("");
-            this.reload();
-        }, (err) => {
-            sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
-                confirmButtonColor: "#a90000",
-                title: 'Error',
-                text: `Algo fallo`,
-                icon: 'error',
-            });
-        });
-        this.formulario.reset();
+            this.formulario.reset();
+            this.carrera = null;
+        }
+        else {
+            if (this.existe(nuevoNombre)) {
+                sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
+                    confirmButtonColor: "#a90000",
+                    icon: "warning",
+                    title: "Advertencia",
+                    text: "Ya existe la carrera",
+                });
+                this.formulario.reset();
+                this.carrera = null;
+            }
+            else {
+                this.carrera.nombrecarrera = nuevoNombre;
+                this.carreraService.editar(this.carrera).subscribe(resp => {
+                    sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
+                        confirmButtonColor: "#a90000",
+                        title: 'Éxito',
+                        text: 'Modificado correctamente',
+                        icon: 'success',
+                    });
+                    this.formulario.get('nombrecarrera').setValue("");
+                    this.reload();
+                }, (err) => {
+                    this.reload();
+                    sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
+                        confirmButtonColor: "#a90000",
+                        title: 'Error',
+                        text: `Algo fallo`,
+                        icon: 'error',
+                    });
+                });
+                this.formulario.reset();
+            }
+        }
     }
     eliminar(x) {
         sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
@@ -376,7 +402,7 @@ class CarreraComponent {
                 if (v) {
                     sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
                         confirmButtonColor: "#a90000",
-                        title: 'Error',
+                        title: 'Advertencia',
                         text: `El registro no puede ser eliminado`,
                         icon: 'warning',
                     });

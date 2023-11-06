@@ -229,6 +229,7 @@ class ListarCategoriaComponent {
         this.categoriaService = categoriaService;
         this.fb = fb;
         this.categorias = [];
+        this.equipos = [];
         this.dtOptions = {};
         this.dtTrigger = new rxjs__WEBPACK_IMPORTED_MODULE_8__.Subject();
         this.formulario = this.inifc();
@@ -265,6 +266,9 @@ class ListarCategoriaComponent {
             this.dtTrigger.next(null);
             this.categoria = null;
         });
+        this.categoriaService.equipos().subscribe(data => {
+            this.equipos = data;
+        });
     }
     esCampoValido(campo) {
         const validarCampo = this.formulario.get(campo);
@@ -284,9 +288,9 @@ class ListarCategoriaComponent {
         if (this.existe(this.categoria.nombre.toLowerCase() || this.categoria.nombre.toUpperCase())) {
             sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire({
                 confirmButtonColor: "#a90000",
-                title: 'Error',
+                title: 'Advertencia',
                 text: 'Ya existe la categoría',
-                icon: 'error',
+                icon: 'warning',
             });
             this.formulario.reset();
             this.reload();
@@ -322,25 +326,52 @@ class ListarCategoriaComponent {
         this.categoria = x;
     }
     editar() {
-        this.categoria.nombre = this.formulario.controls['nombre'].value;
-        this.categoriaService.editar(this.categoria).subscribe(resp => {
+        const nuevoNombre = this.formulario.controls['nombre'].value;
+        if (nuevoNombre === this.categoria.nombre) {
             sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire({
                 confirmButtonColor: "#a90000",
                 title: 'Éxito',
-                text: `Modificado correctamente`,
+                text: 'No se realizaron cambios.',
                 icon: 'success',
             });
-            this.reload();
-            this.formulario.get('nombre').setValue("");
-        }, (err) => {
-            sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire({
-                confirmButtonColor: "#a90000",
-                title: 'Error',
-                text: `Ya existe la categoría`,
-                icon: 'error',
-            });
-        });
-        this.formulario.reset();
+            this.formulario.reset();
+            this.categoria = null;
+        }
+        else {
+            if (this.existe(nuevoNombre)) {
+                sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire({
+                    confirmButtonColor: "#a90000",
+                    title: 'Advertencia',
+                    text: `Ya existe la categoría`,
+                    icon: 'warning',
+                });
+                this.formulario.reset();
+                this.categoria = null;
+            }
+            else {
+                this.categoria.nombre = nuevoNombre;
+                this.categoriaService.editar(this.categoria).subscribe(resp => {
+                    sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire({
+                        confirmButtonColor: "#a90000",
+                        title: 'Éxito',
+                        text: `Modificado correctamente`,
+                        icon: 'success',
+                    });
+                    this.reload();
+                    this.formulario.get('nombre').setValue("");
+                }, (err) => {
+                    this.reload();
+                    this.reload();
+                    sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire({
+                        confirmButtonColor: "#a90000",
+                        title: 'Error',
+                        text: `Algo fallo`,
+                        icon: 'error',
+                    });
+                });
+                this.formulario.reset();
+            }
+        }
     }
     eliminar(x) {
         sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire({
@@ -354,26 +385,23 @@ class ListarCategoriaComponent {
             cancelButtonText: 'Cancelar'
         }).then((result) => {
             if (result.isConfirmed) {
-                if (this.verificar(x.id)) {
+                this.categoriaService.eliminar(x.id).subscribe((response) => {
                     sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire({
                         confirmButtonColor: "#a90000",
-                        title: 'Error',
+                        title: "Eliminado",
+                        text: `El registro ha sido eliminado`,
+                        icon: "success",
+                    });
+                    this.formulario.reset();
+                    this.reload();
+                }, (err) => {
+                    sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire({
+                        confirmButtonColor: "#a90000",
+                        title: "Advertencia",
                         text: `El registro no puede ser eliminado`,
-                        icon: 'warning',
+                        icon: "warning",
                     });
-                }
-                else {
-                    this.categoriaService.eliminar(x.id).subscribe(response => {
-                        sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire({
-                            confirmButtonColor: "#a90000",
-                            title: 'Eliminado',
-                            text: `El registro ha sido eliminado`,
-                            icon: 'success',
-                        });
-                        this.formulario.reset();
-                        this.reload();
-                    });
-                }
+                });
             }
             else if (result.isDenied) {
                 sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire({
@@ -386,7 +414,7 @@ class ListarCategoriaComponent {
         });
     }
     verificar(id) {
-        return this.categorias.some(cat => cat.id === id);
+        return this.equipos.some(eq => eq.categoria.id === id);
     }
     /**Para recargar */
     reload() {
@@ -397,9 +425,10 @@ class ListarCategoriaComponent {
         });
     }
     existe(nombre) {
-        const nombreEnMinusculas = nombre.toLowerCase();
-        return this.categorias.some(categoria => {
-            return categoria.nombre.toLowerCase() === nombreEnMinusculas;
+        const normalizedNombre = nombre.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        return this.categorias.some(data => {
+            const normalizedCarrera = data.nombre.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            return normalizedCarrera.toLocaleLowerCase() === normalizedNombre.toLocaleLowerCase();
         });
     }
     //PARA LA AYUDA
@@ -542,9 +571,13 @@ class CategoriaService {
     constructor(http) {
         this.http = http;
         this.url = `${src_environments_environment__WEBPACK_IMPORTED_MODULE_1__.environment.urlG}/categoria`;
+        this.urlE = `${src_environments_environment__WEBPACK_IMPORTED_MODULE_1__.environment.urlG}/equipo`;
     }
     categorias() {
         return this.http.get(`${this.url}`);
+    }
+    equipos() {
+        return this.http.get(`${this.urlE}`);
     }
     guardarCategoria(x) {
         return this.http.post(`${this.url}/guardar`, x);

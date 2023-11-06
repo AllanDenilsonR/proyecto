@@ -434,9 +434,9 @@ class ListarUbicacionComponent {
                 }, (err) => {
                     sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
                         confirmButtonColor: "#a90000",
-                        icon: 'error',
-                        title: 'Error',
-                        text: err.error.msg
+                        title: 'Advertencia',
+                        text: "No puede ser eliminado",
+                        icon: 'warning',
                     });
                 });
             }
@@ -492,7 +492,7 @@ class ListarUbicacionComponent {
                     sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
                         confirmButtonColor: "#a90000",
                         title: 'Advertencia',
-                        text: `Ocurrio un problema`,
+                        text: `Ocurrió un problema`,
                         icon: 'warning',
                     });
                 }
@@ -530,7 +530,7 @@ class ListarUbicacionComponent {
                     sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
                         confirmButtonColor: "#a90000",
                         title: 'Advertencia',
-                        text: `Ocurrio un problema`,
+                        text: `Ocurrió un problema`,
                         icon: 'warning',
                     });
                 }
@@ -702,8 +702,8 @@ class ServiceUbicacionService {
         this.http = http;
         this.url = `${src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.urlG}/ubicacion`;
     }
-    ubicaciones(page = 0, size = 3) {
-        return this.http.get(`${this.url}` + '?' + `page=${page}&size=${size}`);
+    ubicaciones() {
+        return this.http.get(`${this.url}`);
     }
     guardar(data) {
         return this.http.post(`${this.url}`, data);

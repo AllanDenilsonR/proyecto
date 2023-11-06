@@ -748,13 +748,13 @@ class RegistroComponent {
     calcularTotalF() {
         this.totalF = 0.00;
         if (this.detalles.length == 0) {
-            return this.totalF = 0.00;
+            return parseFloat(this.totalF.toFixed(2));
         }
         else {
             this.detalles.forEach((detalle) => {
                 this.totalF += detalle.totalx();
             });
-            return this.totalF;
+            return parseFloat(this.totalF.toFixed(2));
         }
     }
     limpiar() {

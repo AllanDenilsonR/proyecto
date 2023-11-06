@@ -1808,7 +1808,12 @@ class ListaComponent {
             return;
         }
         else if (this.existeTel(telefono)) {
-            this.error = "El teléfono ya existe";
+            sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
+                confirmButtonColor: "#a90000",
+                title: "Advertencia",
+                text: `Teléfono ya registrado`,
+                icon: "warning",
+            });
             return;
         }
         else {
@@ -1836,12 +1841,20 @@ class ListaComponent {
                     });
                 }
             }, err => {
+                if (err.status == 409) {
+                    sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
+                        confirmButtonColor: "#a90000",
+                        title: 'Advertencia',
+                        text: `Ya existe el carnet`,
+                        icon: 'warning',
+                    });
+                }
                 if (err.status == 400) {
                     sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
                         confirmButtonColor: "#a90000",
-                        title: 'Error',
-                        text: `Ya existe el carnet"`,
-                        icon: 'warning',
+                        title: "Advertencia",
+                        text: `Teléfono ya registrado`,
+                        icon: "warning",
                     });
                 }
             });
@@ -1942,9 +1955,9 @@ class ListaComponent {
         if (this.existeCarrera(c.nombrecarrera.toLowerCase())) {
             sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
                 confirmButtonColor: "#a90000",
-                title: 'Error',
+                title: 'Advertencia',
                 text: `Ya existe la carrera`,
-                icon: 'error',
+                icon: 'warning',
             });
             return;
         }
@@ -1982,7 +1995,11 @@ class ListaComponent {
         });
     }
     existeCarrera(nombre) {
-        return this.carreras.some((carrera) => carrera.nombrecarrera === nombre);
+        const normalizedNombre = nombre.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        return this.carreras.some(carrera => {
+            const normalizedCarrera = carrera.nombrecarrera.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            return normalizedCarrera.toLocaleLowerCase() === normalizedNombre.toLocaleLowerCase();
+        });
     }
     existeTel(telefono) {
         return this.estudiantes.some((estudiante) => estudiante.telefono === telefono);

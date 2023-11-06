@@ -181,9 +181,11 @@ function ListaAdminComponent_tr_32_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵadvance"](2);
     _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵtextInterpolate2"]("", data_r9.nombres, " ", data_r9.apellidos, "");
     _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵadvance"](2);
-    _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵtextInterpolate"](_angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵpipeBind1"](7, 5, data_r9.telefono));
+    _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵtextInterpolate"](_angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵpipeBind1"](7, 6, data_r9.telefono));
     _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵadvance"](3);
-    _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵtextInterpolate"](data_r9.cargo.nombrecargo);
+    _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵtextInterpolate"](data_r9.nombrecargo);
+    _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵadvance"](3);
+    _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵproperty"]("disabled", data_r9.usuario === true);
 } }
 function ListaAdminComponent_ng_template_33_ngb_alert_8_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementStart"](0, "ngb-alert", 52);
@@ -870,18 +872,19 @@ class ListaAdminComponent {
         this.error = '';
         this.adminE = admine;
         this.formAdmin.patchValue(admine);
-        this.formAdmin.get('cargo').setValue(admine.cargo.id);
+        // this.formAdmin.get('cargo').setValue(admine.cargo.id)
+        this.formAdmin.get('cargo').setValue(admine.idCargo);
         this.modalService.open(content, { backdrop: 'static', keyboard: false });
     }
     cargarDatosAdmin(page = 0) {
-        this.adminService.mostrarAdmin().subscribe((resp) => {
-            this.admin = resp;
+        // this.adminService.mostrarAdmin().subscribe((resp: any) => {
+        //   this.admin = resp;
+        //   this.dtTrigger.next(null);
+        // });
+        this.adminService.mostrarAdminUser().subscribe((res) => {
+            this.admin = res;
             this.dtTrigger.next(null);
         });
-        // this.adminService.UsuariosListaAdmin().subscribe((resp: any) => {
-        //   this.usuarios = resp;
-        //   console.log("usuario ",resp)
-        // });
     }
     guardarAdmin() {
         if (this.formAdmin.valid) {
@@ -908,8 +911,12 @@ class ListaAdminComponent {
             return;
         }
         else if (this.verificar(admin.telefono)) {
-            this.error = "El teléfono ya existe";
-            return;
+            sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
+                confirmButtonColor: "#a90000",
+                title: "Advertencia",
+                text: `Teléfono ya registrado`,
+                icon: "warning",
+            });
         }
         else {
             this.adminService.nuevoAdmin(admin).subscribe((resp) => {
@@ -923,6 +930,7 @@ class ListaAdminComponent {
                     this.formAdmin.reset();
                     this.formAdmin.get('cargo').setValue('Seleccione');
                     this.reload();
+                    this.modalService.dismissAll();
                 }
             }, (err) => {
                 //consoleerro
@@ -952,7 +960,7 @@ class ListaAdminComponent {
                     this.formAdmin.reset();
                     this.formAdmin.get('cargo').setValue('Seleccione');
                     this.reload();
-                    this.error = '';
+                    this.modalService.dismissAll();
                 }
             }, (err) => {
                 if (err.status === 422) {
@@ -989,7 +997,7 @@ class ListaAdminComponent {
                 }, (err) => {
                     sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
                         confirmButtonColor: "#a90000",
-                        title: 'Error',
+                        title: 'Advertencia',
                         text: 'El registro no puede ser eliminado',
                         icon: 'warning',
                     });
@@ -1023,26 +1031,38 @@ class ListaAdminComponent {
     }
     registrandoCargo() {
         const cargoAdmin = this.formAdminCargo.value;
-        this.cargoService.nuevoCargoAdmin(cargoAdmin).subscribe((resp) => {
-            if (resp) {
-                sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
-                    confirmButtonColor: "#a90000",
-                    title: 'Éxito',
-                    text: `Almacenado correctamente`,
-                    icon: 'success',
-                });
-                this.formAdminCargo.reset();
-                this.llenarComboCargos();
-            }
-        }, (err) => {
-            //consoleerro
+        if (this.existeCargo(cargoAdmin.nombrecargo.toLowerCase())) {
             sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
                 confirmButtonColor: "#a90000",
                 title: 'Advertencia',
-                text: `Ocurrio un problema`,
+                text: `Ya existe el cargo`,
                 icon: 'warning',
             });
-        });
+            return;
+        }
+        else {
+            this.cargoService.nuevoCargoAdmin(cargoAdmin).subscribe((resp) => {
+                if (resp) {
+                    sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
+                        confirmButtonColor: "#a90000",
+                        title: 'Éxito',
+                        text: `Almacenado correctamente`,
+                        icon: 'success',
+                    });
+                    this.formAdminCargo.reset();
+                    this.llenarComboCargos();
+                    this.reload();
+                }
+            }, (err) => {
+                //consoleerro
+                sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
+                    confirmButtonColor: "#a90000",
+                    title: 'Advertencia',
+                    text: `Ocurrio un problema`,
+                    icon: 'warning',
+                });
+            });
+        }
     }
     iniciarFormularioCargoAdmin() {
         return this.fbdos.group({
@@ -1053,6 +1073,13 @@ class ListaAdminComponent {
         const validarCampo = this.formAdminCargo.get(campo);
         return !(validarCampo === null || validarCampo === void 0 ? void 0 : validarCampo.valid) && (validarCampo === null || validarCampo === void 0 ? void 0 : validarCampo.touched)
             ? 'is-invalid' : (validarCampo === null || validarCampo === void 0 ? void 0 : validarCampo.touched) ? 'is-valid' : '';
+    }
+    existeCargo(nombre) {
+        const normalizedNombre = nombre.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        return this.cargos.some(cargo => {
+            const normalizedCargo = cargo.nombrecargo.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            return normalizedCargo.toLocaleLowerCase() === normalizedNombre.toLocaleLowerCase();
+        });
     }
     mostrarRecargando() {
         let currentUrl = this.router.url;
@@ -1075,7 +1102,7 @@ ListaAdminComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE
     } if (rf & 2) {
         let _t;
         _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵqueryRefresh"](_t = _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵloadQuery"]()) && (ctx.dtElement = _t.first);
-    } }, decls: 41, vars: 4, consts: [[1, "container-fluid"], ["title", "Administrador", 3, "breadcrumbItems"], [1, "row"], [1, "col-12"], [1, "card"], [1, "card-body"], [1, "row", "mb-2"], [1, "col-sm-12", "text-end"], [1, "text-sm-end", "mb-3"], ["type", "button", "data-toggle", "tooltip", "ngbTooltip", "Ayuda", "data-placement", "end", 1, "btn", "btn-info", "btn-icon", "rounded-circle", "btn-transparent", 2, "margin-right", "+35px", 3, "click"], [1, "fa", "fa-question-circle", "fa-lg"], [1, "col-sm-12"], [1, "btn", "btn-info", "btn-rounded", 3, "click"], [1, "text-sm-end"], [1, "table-responsive"], ["datatable", "", "width", "100%", 1, "row-border", "hover", 3, "dtOptions", "dtTrigger"], [1, "table", "bg-light", "bg-gradient"], [1, ""], [4, "ngFor", "ngForOf"], ["role", "document"], ["content", ""], ["contentEditar", ""], ["cargo", ""], ["ayuda", ""], ["type", "button", "ngbTooltip", "Editar", 1, "btn", "btn-outline-info", "btn-sm", "dripicons-document-edit", 3, "click"], ["type", "button", "ngbTooltip", "Eliminar", 1, "btn", "btn-outline-danger", "btn-sm", "dripicons-cross", 3, "click"], ["id", "modalAdmin", "tabindex", "-1", "aria-labelledby", "exampleModalLabel", "aria-hidden", "true"], [1, "modal-header"], ["id", "exampleModalLabel", 1, "modal-title"], ["type", "button", "aria-hidden", "true", 1, "btn-close", 3, "click"], [1, "modal-body"], [3, "formGroup", "ngSubmit"], ["type", "danger", 3, "dismissible", 4, "ngIf"], [1, "text-danger", "mb-4"], [1, "col-md-12"], [1, "mb-3"], [1, "text-danger"], ["type", "text", "autocomplete", "off", "placeholder", "Ej: Carlos Miguel", "formControlName", "nombres", 1, "form-control"], [1, "invalid-feedback"], [4, "ngIf"], ["type", "text", "autocomplete", "off", "placeholder", "Ej: Fernandez Guzman", "formControlName", "apellidos", 1, "form-control"], ["type", "text", "autocomplete", "off", "placeholder", "####-####", "mask", "0000-0000", "formControlName", "telefono", 1, "form-control"], [1, "col-md-10"], ["formControlName", "cargo", "placeholder", "Seleccione"], [3, "value", 4, "ngFor", "ngForOf"], [1, "col-md-2"], [1, "text-white"], ["type", "button", 1, "btn", "btn-info", 3, "click"], [1, "mdi", "mdi-plus", "me-1"], [1, "modal-footer"], ["type", "button", 1, "btn", "btn-dark", 3, "click"], ["type", "submit", "id", "btn-save-event", 1, "btn", "btn-info", 3, "disabled"], ["type", "danger", 3, "dismissible"], [3, "value"], ["type", "hidden", "formControlName", "id", 1, "form-control"], ["formControlName", "cargo", "placeholder", "Seleccione", "clearAllText", "Clear"], ["id", "modalCarrera", "tabindex", "-1", "aria-labelledby", "exampleModalLabel", "aria-hidden", "true"], ["type", "text", "autocomplete", "off", "formControlName", "nombrecargo", 1, "form-control"], [1, "modal-header", "bg"], [1, "modal-title", "text-white"], ["type", "button", "aria-label", "Close", 1, "close", 3, "click"], [1, "modal-body", "text-justify"], [2, "margin-bottom", "15px"], [1, "fs-5"], [2, "font-size", "15px"]], template: function ListaAdminComponent_Template(rf, ctx) { if (rf & 1) {
+    } }, decls: 41, vars: 4, consts: [[1, "container-fluid"], ["title", "Administrador", 3, "breadcrumbItems"], [1, "row"], [1, "col-12"], [1, "card"], [1, "card-body"], [1, "row", "mb-2"], [1, "col-sm-12", "text-end"], [1, "text-sm-end", "mb-3"], ["type", "button", "data-toggle", "tooltip", "ngbTooltip", "Ayuda", "data-placement", "end", 1, "btn", "btn-info", "btn-icon", "rounded-circle", "btn-transparent", 2, "margin-right", "+35px", 3, "click"], [1, "fa", "fa-question-circle", "fa-lg"], [1, "col-sm-12"], [1, "btn", "btn-info", "btn-rounded", 3, "click"], [1, "text-sm-end"], [1, "table-responsive"], ["datatable", "", "width", "100%", 1, "row-border", "hover", 3, "dtOptions", "dtTrigger"], [1, "table", "bg-light", "bg-gradient"], [1, ""], [4, "ngFor", "ngForOf"], ["role", "document"], ["content", ""], ["contentEditar", ""], ["cargo", ""], ["ayuda", ""], ["type", "button", "ngbTooltip", "Editar", 1, "btn", "btn-outline-info", "btn-sm", "dripicons-document-edit", 3, "click"], ["type", "button", "ngbTooltip", "Eliminar", 1, "btn", "btn-outline-danger", "btn-sm", "dripicons-cross", 3, "disabled", "click"], ["id", "modalAdmin", "tabindex", "-1", "aria-labelledby", "exampleModalLabel", "aria-hidden", "true"], [1, "modal-header"], ["id", "exampleModalLabel", 1, "modal-title"], ["type", "button", "aria-hidden", "true", 1, "btn-close", 3, "click"], [1, "modal-body"], [3, "formGroup", "ngSubmit"], ["type", "danger", 3, "dismissible", 4, "ngIf"], [1, "text-danger", "mb-4"], [1, "col-md-12"], [1, "mb-3"], [1, "text-danger"], ["type", "text", "autocomplete", "off", "placeholder", "Ej: Carlos Miguel", "formControlName", "nombres", 1, "form-control"], [1, "invalid-feedback"], [4, "ngIf"], ["type", "text", "autocomplete", "off", "placeholder", "Ej: Fernandez Guzman", "formControlName", "apellidos", 1, "form-control"], ["type", "text", "autocomplete", "off", "placeholder", "####-####", "mask", "0000-0000", "formControlName", "telefono", 1, "form-control"], [1, "col-md-10"], ["formControlName", "cargo", "placeholder", "Seleccione"], [3, "value", 4, "ngFor", "ngForOf"], [1, "col-md-2"], [1, "text-white"], ["type", "button", 1, "btn", "btn-info", 3, "click"], [1, "mdi", "mdi-plus", "me-1"], [1, "modal-footer"], ["type", "button", 1, "btn", "btn-dark", 3, "click"], ["type", "submit", "id", "btn-save-event", 1, "btn", "btn-info", 3, "disabled"], ["type", "danger", 3, "dismissible"], [3, "value"], ["type", "hidden", "formControlName", "id", 1, "form-control"], ["formControlName", "cargo", "placeholder", "Seleccione", "clearAllText", "Clear"], ["id", "modalCarrera", "tabindex", "-1", "aria-labelledby", "exampleModalLabel", "aria-hidden", "true"], ["type", "text", "autocomplete", "off", "formControlName", "nombrecargo", 1, "form-control"], [1, "modal-header", "bg"], [1, "modal-title", "text-white"], ["type", "button", "aria-label", "Close", 1, "close", 3, "click"], [1, "modal-body", "text-justify"], [2, "margin-bottom", "15px"], [1, "fs-5"], [2, "font-size", "15px"]], template: function ListaAdminComponent_Template(rf, ctx) { if (rf & 1) {
         const _r65 = _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵgetCurrentView"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelement"](0, "app-loader");
         _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementStart"](1, "div", 0);
@@ -1125,7 +1152,7 @@ ListaAdminComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE
         _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementStart"](31, "tbody");
-        _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵtemplate"](32, ListaAdminComponent_tr_32_Template, 13, 7, "tr", 18);
+        _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵtemplate"](32, ListaAdminComponent_tr_32_Template, 13, 8, "tr", 18);
         _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementEnd"]();
@@ -1184,9 +1211,9 @@ class AdministradorService {
     nuevoCargoAdmin(cargo) {
         return this.http.post(`${this.url}/cargo/guardar`, cargo);
     }
-    // public mostrarAdmin(page: number=0, size: number=0): Observable<any> {
-    //   return this.http.get<any>(`${this.url}/administrador/listaAdmin`+'?'+ `page=${page}&size=${size}`);
-    // }
+    mostrarAdminUser() {
+        return this.http.get(`${this.url}/administrador/listaAdminResp`);
+    }
     mostrarAdmin() {
         return this.http.get(`${this.url}/administrador/listaAdmin`);
     }
